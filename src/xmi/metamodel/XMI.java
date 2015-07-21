@@ -11,7 +11,6 @@ public class XMI {
     }
 
     
-    
     public XMI(String version, String xmlns, String timeStamp, XMIHeader header, XMIContent content) {
         this.version = version;
         this.xmlns = xmlns;

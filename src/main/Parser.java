@@ -37,6 +37,11 @@ import xmi.metamodel.content.UMLStructuralFeatureType;
  */
 public class Parser {
 
+    /**
+     * This method provides ad-hoc testing
+     * @param args
+     * @throws Exception 
+     */
     public static void main(String[] args) throws Exception {
         SAXParserFactory parserFactor = SAXParserFactory.newInstance();
         SAXParser parser = parserFactor.newSAXParser();
@@ -56,7 +61,7 @@ public class Parser {
                         
                         ///***/// classes
                         p1.getClasses().forEach(c -> {
-                            System.out.println("Class: " + c.getName());
+                            System.out.println("Class: " + c.getName());                            
                             c.getClassifierFeature().getAttributes().forEach(a -> {
                                 UMLMultiplicityRange r = a.getStructuralFeatureMultiplicity().getMultiplicity().getMultiplicityRange();
                                 System.out.println("  (" + r.getLower() + "," + r.getUpper() + ")" + a.getName());
@@ -91,23 +96,19 @@ public class Parser {
                 });
             });
         });
-
-        //Printing the list of employees obtained from XML
-        /*for (Employee emp : handler.empList) {
-         System.out.println(emp);
-         }*/
     }
 }
 
 /**
- * The Handler for SAX Events.
+ * The Handler for SAX for a XMI file
+ * @author ruicouto
  */
 class SAXHandler extends DefaultHandler {
 
-    private String content = null;
-
+    /**
+     * The xmi instance
+     */
     private XMI xmi;
-
     private UMLModel model;
     private UMLPackage mpackage;
     private UMLClass mclass;
@@ -117,9 +118,19 @@ class SAXHandler extends DefaultHandler {
     private UMLParameter mParameter;
     private UMLAssociation mAssociation;
     private UMLAssociationEnd mAssociationEnd;
+    private UMLMultiplicity mMultiplicity;
 
+    private String content = null;
+    
+    /**
+     * Triggered when the start of tag is found.
+     * @param uri
+     * @param localName
+     * @param qName
+     * @param attributes
+     * @throws SAXException 
+     */
     @Override
-    //Triggered when the start of tag is found.
     public void startElement(String uri, String localName,
             String qName, Attributes attributes)
             throws SAXException {
@@ -213,13 +224,21 @@ class SAXHandler extends DefaultHandler {
                         Boolean.parseBoolean(attributes.getValue("isAbstract")));
                 mclass.getClassifierFeature().getOperations().add(mOperation);
                 break;
+                
+            case "UML:Multiplicity":
+                mMultiplicity = new UMLMultiplicity(attributes.getValue("xmi.id"), null);
+                break;
 
             case "UML:MultiplicityRange":
-                if (mAttribute != null) {
-                    UMLStructuralFeatureMulticiply f = new UMLStructuralFeatureMulticiply(new UMLMultiplicity(new UMLMultiplicityRange(attributes.getValue("id"),
+                UMLMultiplicityRange mr = new UMLMultiplicityRange(attributes.getValue("xmi.id"),
                             attributes.getValue("lower").charAt(0),
-                            attributes.getValue("upper").charAt(0))));
+                            attributes.getValue("upper").charAt(0));
+                if (mAttribute != null) {
+                    mMultiplicity.setMultiplicityRange(mr);
+                    UMLStructuralFeatureMulticiply f = new UMLStructuralFeatureMulticiply(mMultiplicity);
                     mAttribute.setStructuralFeatureMultiplicity(f);
+                } else if(mMultiplicity!=null) {
+                    mMultiplicity.setMultiplicityRange(mr);
                 }
                 break;
 
@@ -265,6 +284,13 @@ class SAXHandler extends DefaultHandler {
         }
     }
 
+    /**
+     * Triggered when the end of tag is found.
+     * @param uri
+     * @param localName
+     * @param qName
+     * @throws SAXException 
+     */
     @Override
     public void endElement(String uri, String localName,
             String qName) throws SAXException {
@@ -303,17 +329,31 @@ class SAXHandler extends DefaultHandler {
             case "UML:AssociationEnd.participant":
                 mAssociationEnd.setAssociationEndParticipants(new UMLAssociationEndParticipant(new UMLClass(refId), null));
                 break;
+                
+                
+            case "UML:Multiplicity":
+                mMultiplicity = null;
+                break;               
 
         }
     }
 
+    /**
+     * Triggered when characters inside a tag are found
+     * @param ch
+     * @param start
+     * @param length
+     * @throws SAXException 
+     */
     @Override
-    public void characters(char[] ch, int start, int length)
-            throws SAXException {
+    public void characters(char[] ch, int start, int length) throws SAXException {
         content = String.copyValueOf(ch, start, length).trim();
-        //System.out.println(content);
     }
 
+    /**
+     * Get the result
+     * @return The XMI representation
+     */
     public XMI getXmi() {
         return xmi;
     }

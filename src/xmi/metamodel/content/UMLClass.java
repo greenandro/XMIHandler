@@ -4,7 +4,7 @@ import java.util.Map;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import xmi.aux.XMISerializable;
+import xmi.architectural.XMISerializable;
 
 public class UMLClass implements XMISerializable {
 

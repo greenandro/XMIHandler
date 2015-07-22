@@ -4,11 +4,12 @@ import java.util.Map;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import xmi.architectural.XMISerializable;
+import xmi.metamodel.interfaces.XMISerializable;
+import xmi.metamodel.interfaces.XMIReferenceable;
 
-public class UMLClass implements XMISerializable {
+public class UMLClass implements XMISerializable, XMIReferenceable {
 
-    private String idRef;
+    private String refId;
     
     private String id;
     private String name;
@@ -25,17 +26,21 @@ public class UMLClass implements XMISerializable {
     private List<UMLModelElementClientDependency> modelElementClientDependency;
     private Map<String,String> otherProperties;
 
-    public UMLClass(String idRef) {
-        this.idRef = idRef;
+    public UMLClass(String refId) {
+        this.refId = refId;
     }
 
-    public String getIdRef() {
-        return idRef;
+    @Override
+    public String getRefId() {
+        return refId;
     }
 
-    public void setIdRef(String idRef) {
-        this.idRef = idRef;
+    @Override
+    public void setRefId(String refId) {
+        this.refId = refId;
     }
+
+    
 
     public UMLClass(String id, String name, String visibility, boolean isSpecification, boolean isRoot, boolean isLeaf, boolean isAbstract, boolean isActive) {
         this.id = id;

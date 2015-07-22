@@ -1,6 +1,8 @@
 package xmi.metamodel.content;
 
-public class UMLStereotype {
+import xmi.metamodel.interfaces.XMIReferenceable;
+
+public class UMLStereotype implements XMIReferenceable {
 
     private String id;
     private String name;
@@ -9,13 +11,14 @@ public class UMLStereotype {
     private boolean isLeaf;
     private boolean isAbstract;
     
-    private String refid;
+    private String refId;
 
     private UMLStereotypeBaseClass stereotypeBaseClasses;
 
-    public UMLStereotype(String refid) {
-        this.refid = refid;
+    public UMLStereotype(String refId) {
+        this.refId = refId;
     }
+    
     
     public UMLStereotype(String id, String name, boolean isSpecification, boolean isRoot, boolean isLeaf, boolean isAbstract, UMLStereotypeBaseClass stereotypeBaseClasses) {
         this.id = id;
@@ -27,6 +30,18 @@ public class UMLStereotype {
         this.stereotypeBaseClasses = stereotypeBaseClasses;
     }
 
+    @Override
+    public String getRefId() {
+        return refId;
+    }
+
+    @Override
+    public void setRefId(String refId) {
+        this.refId = refId;
+    }
+
+    
+    
     public String getId() {
         return id;
     }

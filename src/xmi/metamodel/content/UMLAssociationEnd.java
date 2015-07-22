@@ -1,8 +1,5 @@
 package xmi.metamodel.content;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class UMLAssociationEnd {
 
     public String id;

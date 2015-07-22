@@ -4,8 +4,8 @@ public class UMLDependencyClient {
 
     private UMLClass umlclass;
 
-    public UMLDependencyClient(UMLClass umlclass) {
-        this.umlclass = umlclass;
+    public UMLDependencyClient() {
+        this.umlclass = null;
     }
 
     public UMLClass getUmlclass() {

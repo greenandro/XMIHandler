@@ -60,8 +60,9 @@ public class Parser {
         SAXHandler handler = new SAXHandler();
         //parser.parse(new File("XMI.xmi"), handler);
         parser.parse(new File("testXmi.xmi"), handler);
-        //TODO: After parsing, it lacks to resolve references
-
+        //TODO: After parsing, resolve references
+        
+        
         //parser.parse(new File("xmiMetamodel.xmi"), handler);
         XMI xmi = handler.getXmi();
 
@@ -108,7 +109,7 @@ public class Parser {
                         System.out.println("--- Generalizations ---");
                         ///***/// Generalizations
                         p1.getGeneratlizations().forEach(g -> {
-                            System.out.println(g.getChild().getUmlClass().getIdRef() + " -> " + g.getParent().getUmlClass().getIdRef());
+                            System.out.println(g.getChild().getUmlClass().getRefId() + " -> " + g.getParent().getUmlClass().getRefId());
                         });
                         
                         
@@ -121,8 +122,8 @@ public class Parser {
                         System.out.println("---Abstractions---");
                         ///***/// Abstractions
                         p1.getAbstractions().forEach(a -> {
-                            System.out.println(a.getDependencyClient().getUmlclass().getIdRef() + ", " + 
-                                    a.getDependencySupplier().get(0).getUmlinterface().getRefId());
+                            System.out.println(a.getDependencyClient().getUmlclass().getRefId()+ ", " + 
+                                    a.getDependencySupplier().getUmlinterface().getRefId());
                         });
                         
                         System.out.println("---Stereotypes---");
@@ -491,7 +492,7 @@ class SAXHandler extends DefaultHandler {
                 
             case "UML:Dependency.supplier":
                 UMLInterface i = new UMLInterface(refId);
-                mAbstraction.getDependencySupplier().add(new UMLDependencySupplier(i));
+                mAbstraction.setDependencySupplier(new UMLDependencySupplier(i));
                 break;
                 
                 

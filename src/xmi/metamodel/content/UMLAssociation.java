@@ -17,7 +17,7 @@ public class UMLAssociation {
         this.isRoot = isRoot;
         this.isLeaf = isLeaf;
         this.isAbstract = isAbstract;
-        this.associationConnections = new UMLAssociationConnection(null, null);
+        this.associationConnections = new UMLAssociationConnection();
     }
 
     public String getId() {
@@ -76,6 +76,4 @@ public class UMLAssociation {
         this.associationConnections = associationConnections;
     }
     
-    
-
 }

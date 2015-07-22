@@ -1,9 +1,11 @@
 package xmi.metamodel;
 
-public class XMIDocumentation {
+import xmi.metamodel.interfaces.XMISerializable;
+
+public class XMIDocumentation implements XMISerializable {
 
     private String exporter;
-    private  String exporterVersion;
+    private String exporterVersion;
 
     public XMIDocumentation() {
     }
@@ -27,6 +29,19 @@ public class XMIDocumentation {
 
     public void setExporterVersion(String exporterVersion) {
         this.exporterVersion = exporterVersion;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toXmi() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("<XMI.documentation>\n");
+        sb.append("<XMI.exporter>").append(exporter).append("</XMI.exporter>");
+        sb.append("<XMI.exporterVersion>").append(exporterVersion).append("</XMI.exporterVersion>");
+        sb.append("</XMI.documentation>");
+        return sb.toString();
     }
   
 }

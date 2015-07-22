@@ -1,6 +1,8 @@
 package xmi.metamodel.content;
 
-public class UMLGeneralization {
+import xmi.metamodel.interfaces.XMIReferenceable;
+
+public class UMLGeneralization implements XMIReferenceable {
 
     private String refId;
     
@@ -10,6 +12,17 @@ public class UMLGeneralization {
     public UMLGeneralization(String refId) {
         this.refId = refId;
     }
+
+    @Override
+    public String getRefId() {
+        return this.refId;
+    }
+
+    @Override
+    public void setRefId(String refId) {
+        this.refId = refId;
+    }
+    
 
     
     

@@ -1,7 +1,9 @@
 package xmi.metamodel.content;
 
+import xmi.metamodel.interfaces.XMIReferenceable;
 
-public class UMLInterface {
+
+public class UMLInterface implements XMIReferenceable {
 
     public String id;
     public String name;
@@ -30,14 +32,19 @@ public class UMLInterface {
         this.classifierFeature = new UMLClassifierFeature();
     }
 
-    public String getId() {
-        return id;
-    }
-
+    @Override
     public String getRefId() {
         return refId;
     }
+
+    @Override
+    public void setRefId(String refId) {
+        this.refId = refId;
+    }
     
+    public String getId() {
+        return id;
+    }
     
 
     public void setId(String id) {

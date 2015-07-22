@@ -5,6 +5,11 @@ public class UMLDependencySupplier {
     
     private UMLInterface umlinterface;
 
+    public UMLDependencySupplier() {
+    }
+
+    
+    
     public UMLDependencySupplier(UMLInterface umlinterface) {
         this.umlinterface = umlinterface;
     }

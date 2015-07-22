@@ -1,18 +1,23 @@
 package xmi.metamodel.content;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class UMLDependencySupplier {
     
-    public List<UMLInterface>  interfaces;
+    private UMLInterface umlinterface;
 
-    public UMLDependencySupplier() {
-        interfaces = new ArrayList<>();
+    public UMLDependencySupplier(UMLInterface umlinterface) {
+        this.umlinterface = umlinterface;
     }
 
-    public List<UMLInterface> getInterfaces() {
-        return interfaces;
+    public UMLInterface getUmlinterface() {
+        return umlinterface;
     }
+
+    public void setUmlinterface(UMLInterface umlinterface) {
+        this.umlinterface = umlinterface;
+    }
+
+    
+    
     
 }

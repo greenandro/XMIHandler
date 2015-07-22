@@ -2,7 +2,7 @@ package xmi.metamodel.content;
 
 public class UMLDependencyClient {
 
-    public UMLClass umlclass;
+    private UMLClass umlclass;
 
     public UMLDependencyClient(UMLClass umlclass) {
         this.umlclass = umlclass;

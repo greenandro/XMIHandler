@@ -17,6 +17,9 @@ public class UMLPackage {
     private List<UMLAssociation> associations;
     private List<UMLGeneralization> generatlizations;
     private List<UMLInterface> interfaces;
+    private List<UMLAbstraction> abstractions;
+    private List<UMLStereotype> stereotypes;
+    
 
     public UMLPackage(String id, String name, boolean isSpecification, boolean isRoot, boolean isLeaf, boolean isAbstract) {
         this.id = id;
@@ -30,6 +33,8 @@ public class UMLPackage {
         this.associations = new ArrayList<>();
         this.generatlizations = new ArrayList<>();
         this.interfaces = new ArrayList<>();
+        this.abstractions = new ArrayList<>();
+        this.stereotypes = new ArrayList<>();
     }
 
     
@@ -40,8 +45,14 @@ public class UMLPackage {
         this.associations = new ArrayList<>();
         this.generatlizations = new ArrayList<>();
         this.interfaces = new ArrayList<>();
+        this.abstractions = new ArrayList<>();
+        this.stereotypes = new ArrayList<>();
     }
 
+    public List<UMLStereotype> getStereotypes() {
+        return stereotypes;
+    }
+    
     public List<UMLAssociation> getAssociations() {
         return associations;
     }
@@ -60,6 +71,10 @@ public class UMLPackage {
 
     public List<UMLPackage> getPackages() {
         return packages;
+    }
+
+    public List<UMLAbstraction> getAbstractions() {
+        return abstractions;
     }
 
     public String getId() {

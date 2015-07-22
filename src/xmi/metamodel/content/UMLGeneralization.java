@@ -2,9 +2,17 @@ package xmi.metamodel.content;
 
 public class UMLGeneralization {
 
+    private String refId;
+    
     private UMLGeneralizationParent parent;
     private UMLGeneralizationChild child;
 
+    public UMLGeneralization(String refId) {
+        this.refId = refId;
+    }
+
+    
+    
     public UMLGeneralization(UMLGeneralizationParent parent, UMLGeneralizationChild child) {
         this.parent = parent;
         this.child = child;

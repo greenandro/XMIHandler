@@ -2,15 +2,21 @@ package xmi.metamodel.content;
 
 public class UMLStereotype {
 
-    public String id;
-    public String name;
-    public boolean isSpecification;
-    public boolean isRoot;
-    public boolean isLeaf;
-    public boolean isAbstract;
+    private String id;
+    private String name;
+    private boolean isSpecification;
+    private boolean isRoot;
+    private boolean isLeaf;
+    private boolean isAbstract;
+    
+    private String refid;
 
-    public UMLStereotypeBaseClass stereotypeBaseClasses;
+    private UMLStereotypeBaseClass stereotypeBaseClasses;
 
+    public UMLStereotype(String refid) {
+        this.refid = refid;
+    }
+    
     public UMLStereotype(String id, String name, boolean isSpecification, boolean isRoot, boolean isLeaf, boolean isAbstract, UMLStereotypeBaseClass stereotypeBaseClasses) {
         this.id = id;
         this.name = name;

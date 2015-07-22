@@ -1,7 +1,5 @@
 package xmi.metamodel.content;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class UMLInterface {
 
@@ -12,9 +10,15 @@ public class UMLInterface {
     public boolean isRoot;
     public boolean isLeaf;
     public boolean isAbstract;
+    
+    private String refId;
 
-    public List<UMLClassifierFeature> classifierFeatures;
+    public UMLClassifierFeature classifierFeature;
 
+    public UMLInterface(String refId) {
+        this.refId = refId;
+    }
+    
     public UMLInterface(String id, String name, String visibility, boolean isSpecification, boolean isRoot, boolean isLeaf, boolean isAbstract) {
         this.id = id;
         this.name = name;
@@ -23,12 +27,18 @@ public class UMLInterface {
         this.isRoot = isRoot;
         this.isLeaf = isLeaf;
         this.isAbstract = isAbstract;
-        this.classifierFeatures = new ArrayList<>();
+        this.classifierFeature = new UMLClassifierFeature();
     }
 
     public String getId() {
         return id;
     }
+
+    public String getRefId() {
+        return refId;
+    }
+    
+    
 
     public void setId(String id) {
         this.id = id;
@@ -82,16 +92,17 @@ public class UMLInterface {
         this.isAbstract = isAbstract;
     }
 
-    public List<UMLClassifierFeature> getClassifierFeatures() {
-        return classifierFeatures;
+    public UMLClassifierFeature getClassifierFeature() {
+        return classifierFeature;
     }
 
-    public void setClassifierFeatures(List<UMLClassifierFeature> classifierFeatures) {
-        this.classifierFeatures = classifierFeatures;
+    public void setClassifierFeatures(UMLClassifierFeature classifierFeature) {
+        this.classifierFeature = classifierFeature;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
     
-    
-    
-    
-
 }

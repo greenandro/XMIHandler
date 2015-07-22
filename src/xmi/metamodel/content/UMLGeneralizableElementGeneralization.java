@@ -1,18 +1,20 @@
 package xmi.metamodel.content;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class UMLGeneralizableElementGeneralization {
 
-    private List<UMLGeneralization>  generalizations;
+    private UMLGeneralization  generalizations;
 
     public UMLGeneralizableElementGeneralization() {
-        generalizations = new ArrayList<>();
     }
 
-    public List<UMLGeneralization> getGeneralizations() {
+    public UMLGeneralization getGeneralizations() {
         return generalizations;
     }
+
+    public void setGeneralizations(UMLGeneralization generalizations) {
+        this.generalizations = generalizations;
+    }
+
+    
     
 }

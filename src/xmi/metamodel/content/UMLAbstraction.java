@@ -5,20 +5,34 @@ import java.util.List;
 
 public class UMLAbstraction {
 
+    private String idref;
     private String id;
     private boolean isSpecification;
     private UMLDependencyClient dependencyClient;
     private List<UMLModelElementStereotype>  modelElementStereotypes;
     private List<UMLDependencySupplier>  dependencySupplier;
 
-    public UMLAbstraction(String id, boolean isSpecification, UMLDependencyClient dependencyClient) {
+    public UMLAbstraction(String idref) {
+        this.idref = idref;
+        this.dependencyClient = new UMLDependencyClient(null);
+    }
+    
+    public UMLAbstraction(String id, boolean isSpecification) {
         this.id = id;
         this.isSpecification = isSpecification;
-        this.dependencyClient = dependencyClient;
+        this.dependencyClient = new UMLDependencyClient(null);
         this.modelElementStereotypes = new ArrayList<>();
         this.dependencySupplier = new ArrayList<>();
     }
 
+    public String getIdref() {
+        return idref;
+    }
+
+    public void setIdref(String idref) {
+        this.idref = idref;
+    }
+    
     public UMLDependencyClient getDependencyClient() {
         return dependencyClient;
     }
@@ -42,5 +56,15 @@ public class UMLAbstraction {
     public void setIsSpecification(boolean isSpecification) {
         this.isSpecification = isSpecification;
     }
+
+    public List<UMLDependencySupplier> getDependencySupplier() {
+        return dependencySupplier;
+    }
+
+    public List<UMLModelElementStereotype> getModelElementStereotypes() {
+        return modelElementStereotypes;
+    }
+    
+    
 
 }

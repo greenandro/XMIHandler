@@ -62,15 +62,15 @@ public class Parser {
         XMI xmi = Parser.parse("testXmi.xmi", HandlerFactory.getHandler(HandlerFactory.ARGOUML));
         //XMI xmi = Parser.parse("xmiMetamodel.xmi");
         //XMI xmi = Parser.parse("XMI.xmi");
-
+        System.out.println("--");
         xmi.getContent().getModels().forEach(m -> {
-            m.getPackages().forEach(p -> {
-                p.getPackages().forEach(pn -> {
-                    pn.getPackages().forEach(p1 -> {
+            m.getNamespaceOwnedElement().getPackages().forEach(p -> {
+                p.getNamespaceOwnedElement().getPackages().forEach(pn -> {
+                    pn.getNamespaceOwnedElement().getPackages().forEach(p1 -> {
                         System.out.println("package: " + p1.getName());
                         
                         ///***/// classes
-                        p1.getClasses().forEach(c -> {
+                        p1.getNamespaceOwnedElement().getClasses().forEach(c -> {
                             System.out.println("Class: " + c.getName());                            
                             c.getClassifierFeature().getAttributes().forEach(a -> {
                                 UMLMultiplicityRange r = a.getStructuralFeatureMultiplicity().getMultiplicity().getMultiplicityRange();
@@ -99,33 +99,33 @@ public class Parser {
                         });
                         
                         ///***/// Associations
-                        p1.getAssociations().forEach(a -> {
+                        p1.getNamespaceOwnedElement().getAssociations().forEach(a -> {
                             System.out.println(a.getName());
                         });
                         
                         System.out.println("--- Generalizations ---");
                         ///***/// Generalizations
-                        p1.getGeneratlizations().forEach(g -> {
+                        p1.getNamespaceOwnedElement().getGeneratlizations().forEach(g -> {
                             System.out.println(g.getChild().getUmlClass().getRefId() + " -> " + g.getParent().getUmlClass().getRefId());
                         });
                         
                         
                         System.out.println("---Intefaces---");
                         ///***/// Interfaces
-                        p1.getInterfaces().forEach(i -> {
+                        p1.getNamespaceOwnedElement().getInterfaces().forEach(i -> {
                             System.out.println(i.getName());
                         });
                         
                         System.out.println("---Abstractions---");
                         ///***/// Abstractions
-                        p1.getAbstractions().forEach(a -> {
+                        p1.getNamespaceOwnedElement().getAbstractions().forEach(a -> {
                             System.out.println(a.getDependencyClient().getUmlclass().getRefId()+ ", " + 
                                     a.getDependencySupplier().getUmlinterface().getRefId());
                         });
                         
                         System.out.println("---Stereotypes---");
                         ///***/// Abstractions
-                        p1.getStereotypes().forEach(a -> {
+                        p1.getNamespaceOwnedElement().getStereotypes().forEach(a -> {
                             System.out.println(a.getName());
                             System.out.println(a.getStereotypeBaseClasses().getContent());
                         });

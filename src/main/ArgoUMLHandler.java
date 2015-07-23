@@ -31,6 +31,7 @@ import xmi.metamodel.content.UMLModelElementClientDependency;
 import xmi.metamodel.content.UMLModelElementStereotype;
 import xmi.metamodel.content.UMLMultiplicity;
 import xmi.metamodel.content.UMLMultiplicityRange;
+import xmi.metamodel.content.UMLNamespaceOwnedElement;
 import xmi.metamodel.content.UMLOperation;
 import xmi.metamodel.content.UMLPackage;
 import xmi.metamodel.content.UMLParameter;
@@ -39,6 +40,7 @@ import xmi.metamodel.content.UMLStereotype;
 import xmi.metamodel.content.UMLStereotypeBaseClass;
 import xmi.metamodel.content.UMLStructuralFeatureMulticiply;
 import xmi.metamodel.content.UMLStructuralFeatureType;
+import xmi.metamodel.interfaces.XMINamespaceOwner;
 
 /**
  *
@@ -64,6 +66,9 @@ class ArgoUMLHandler extends DefaultHandler implements XMIHandler {
     private UMLAbstraction mAbstraction;
     private UMLInterface mInterface;
     private UMLStereotype mStereotype;
+    private UMLNamespaceOwnedElement ownedElement;
+    
+    private XMINamespaceOwner mNamespaceOwner;
     
     private String lastTag = "";
     private String content = null;
@@ -114,6 +119,13 @@ class ArgoUMLHandler extends DefaultHandler implements XMIHandler {
                         Boolean.parseBoolean(attributes.getValue("isLeaf")),
                         Boolean.parseBoolean(attributes.getValue("isAbstract")));
                 xmi.getContent().getModels().add(model);
+                mNamespaceOwner = model;
+                break;
+                
+                
+            case "UML:Namespace.ownedElement":
+                ownedElement = new UMLNamespaceOwnedElement();
+                mNamespaceOwner.setNamespaceOwnedElement(ownedElement);
                 break;
 
             case "UML:Package":
@@ -123,11 +135,12 @@ class ArgoUMLHandler extends DefaultHandler implements XMIHandler {
                         Boolean.parseBoolean(attributes.getValue("isRoot")),
                         Boolean.parseBoolean(attributes.getValue("isLeaf")),
                         Boolean.parseBoolean(attributes.getValue("isAbstract")));
+                mNamespaceOwner = p;
                 if (mpackage == null) {
                     mpackage = p;
-                    model.getPackages().add(mpackage);
+                    ownedElement.getPackages().add(mpackage);
                 } else {
-                    mpackage.getPackages().add(p);
+                    mpackage.getNamespaceOwnedElement().getPackages().add(p);
                     mpackage = p;
                 }
                 break;
@@ -144,7 +157,7 @@ class ArgoUMLHandler extends DefaultHandler implements XMIHandler {
                             Boolean.parseBoolean(attributes.getValue("isLeaf")),
                             Boolean.parseBoolean(attributes.getValue("isAbstract")),
                             Boolean.parseBoolean(attributes.getValue("active")));
-                    mpackage.getClasses().add(mclass);
+                        ownedElement.getClasses().add(mclass);
                 } else {
                     lastTag = "umlclassref";
                     //is reference
@@ -219,7 +232,7 @@ class ArgoUMLHandler extends DefaultHandler implements XMIHandler {
                         Boolean.parseBoolean(attributes.getValue("isRoot")), 
                         Boolean.parseBoolean(attributes.getValue("isLeaf")),  
                         Boolean.parseBoolean(attributes.getValue("isAbstract")));
-                mpackage.getAssociations().add(mAssociation);
+                ownedElement.getAssociations().add(mAssociation);
                 break;
                                 
             case "UML:AssociationEnd":
@@ -246,7 +259,7 @@ class ArgoUMLHandler extends DefaultHandler implements XMIHandler {
                     mclass.getGeneralizableElementGeneralizations().add(g);
                 } else {
                     mGeneralization = new UMLGeneralization(null, null);
-                    mpackage.getGeneratlizations().add(mGeneralization);
+                    mpackage.getNamespaceOwnedElement().getGeneratlizations().add(mGeneralization);
                 }
                 break;
             
@@ -257,7 +270,7 @@ class ArgoUMLHandler extends DefaultHandler implements XMIHandler {
                     mclass.getModelElementClientDependency().add(cd);
                 } else {
                     mAbstraction = new UMLAbstraction(attributes.getValue("xmi.id"), Boolean.parseBoolean(attributes.getValue("isSpecification")));
-                    mpackage.getAbstractions().add(mAbstraction);
+                    mpackage.getNamespaceOwnedElement().getAbstractions().add(mAbstraction);
                 }
                 break;
             
@@ -270,7 +283,7 @@ class ArgoUMLHandler extends DefaultHandler implements XMIHandler {
                             Boolean.parseBoolean(attributes.getValue("isLeaf")), 
                             Boolean.parseBoolean(attributes.getValue("isAbstract")));
                 if(mAbstraction==null) {
-                    mpackage.getInterfaces().add(mInterface);
+                    mpackage.getNamespaceOwnedElement().getInterfaces().add(mInterface);
                 }
                 break;
                 
@@ -284,7 +297,7 @@ class ArgoUMLHandler extends DefaultHandler implements XMIHandler {
                             Boolean.parseBoolean(attributes.getValue("isRoot")), 
                             Boolean.parseBoolean(attributes.getValue("isLeaf")), 
                             Boolean.parseBoolean(attributes.getValue("isAbstract")), null);
-                    mpackage.getStereotypes().add(mStereotype);
+                    mpackage.getNamespaceOwnedElement().getStereotypes().add(mStereotype);
                 } else {
                     //reference
                     refId = attributes.getValue("xmi.idref");

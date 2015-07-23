@@ -1,9 +1,9 @@
 package xmi.metamodel.content;
 
-import java.util.ArrayList;
-import java.util.List;
+import xmi.metamodel.interfaces.XMINamespaceOwner;
 
-public class UMLPackage {
+
+public class UMLPackage implements XMINamespaceOwner {
 
     private String id;
     private String name;
@@ -12,13 +12,10 @@ public class UMLPackage {
     private boolean isLeaf;
     private boolean isAbstract;
     
-    private List<UMLPackage> packages;
-    private List<UMLClass> classes;
-    private List<UMLAssociation> associations;
-    private List<UMLGeneralization> generatlizations;
-    private List<UMLInterface> interfaces;
-    private List<UMLAbstraction> abstractions;
-    private List<UMLStereotype> stereotypes;
+    
+    private UMLNamespaceOwnedElement ownedElement;
+    
+    
     
 
     public UMLPackage(String id, String name, boolean isSpecification, boolean isRoot, boolean isLeaf, boolean isAbstract) {
@@ -28,55 +25,12 @@ public class UMLPackage {
         this.isRoot = isRoot;
         this.isLeaf = isLeaf;
         this.isAbstract = isAbstract;
-        this.packages = new ArrayList<>();
-        this.classes = new ArrayList<>();
-        this.associations = new ArrayList<>();
-        this.generatlizations = new ArrayList<>();
-        this.interfaces = new ArrayList<>();
-        this.abstractions = new ArrayList<>();
-        this.stereotypes = new ArrayList<>();
+        ownedElement = new UMLNamespaceOwnedElement();
     }
-
-    
     
     public UMLPackage() {
-        this.packages = new ArrayList<>();
-        this.classes = new ArrayList<>();
-        this.associations = new ArrayList<>();
-        this.generatlizations = new ArrayList<>();
-        this.interfaces = new ArrayList<>();
-        this.abstractions = new ArrayList<>();
-        this.stereotypes = new ArrayList<>();
-    }
-
-    public List<UMLStereotype> getStereotypes() {
-        return stereotypes;
     }
     
-    public List<UMLAssociation> getAssociations() {
-        return associations;
-    }
-
-    public List<UMLClass> getClasses() {
-        return classes;
-    }
-
-    public List<UMLGeneralization> getGeneratlizations() {
-        return generatlizations;
-    }
-
-    public List<UMLInterface> getInterfaces() {
-        return interfaces;
-    }
-
-    public List<UMLPackage> getPackages() {
-        return packages;
-    }
-
-    public List<UMLAbstraction> getAbstractions() {
-        return abstractions;
-    }
-
     public String getId() {
         return id;
     }
@@ -125,6 +79,15 @@ public class UMLPackage {
         this.isAbstract = isAbstract;
     }
     
+    @Override
+    public UMLNamespaceOwnedElement getNamespaceOwnedElement() {
+        return ownedElement;
+    }
+
+    @Override
+    public void setNamespaceOwnedElement(UMLNamespaceOwnedElement namespaceOwnedElement) {
+        this.ownedElement = namespaceOwnedElement;
+    }
     
     
 }

@@ -1,9 +1,8 @@
 package xmi.metamodel.content;
 
-import java.util.ArrayList;
-import java.util.List;
+import xmi.metamodel.interfaces.XMINamespaceOwner;
 
-public class UMLModel {
+public class UMLModel implements XMINamespaceOwner {
 
     public String id;
     public String name;
@@ -12,7 +11,8 @@ public class UMLModel {
     public boolean isLeaf;
     public boolean isAbstract;
 
-    public List<UMLPackage> packages;
+    //public List<UMLPackage> packages;
+    private UMLNamespaceOwnedElement ownedElement;
 
     public UMLModel(String id, String name, boolean isSpecification, boolean isRoot, boolean isLeaf, boolean isAbstract) {
         this.id = id;
@@ -21,7 +21,7 @@ public class UMLModel {
         this.isRoot = isRoot;
         this.isLeaf = isLeaf;
         this.isAbstract = isAbstract;
-        this.packages = new ArrayList<>();
+        this.ownedElement = new UMLNamespaceOwnedElement();
     }
 
     public String getId() {
@@ -72,8 +72,15 @@ public class UMLModel {
         this.isAbstract = isAbstract;
     }
 
-    public List<UMLPackage> getPackages() {
-        return packages;
+
+    @Override
+    public UMLNamespaceOwnedElement getNamespaceOwnedElement() {
+        return ownedElement;
+    }
+
+    @Override
+    public void setNamespaceOwnedElement(UMLNamespaceOwnedElement namespaceOwnedElement) {
+        this.ownedElement = namespaceOwnedElement;
     }
 
 }

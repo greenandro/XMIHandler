@@ -1,6 +1,8 @@
 package xmi.metamodel.content;
 
-public class UMLDependencyClient {
+import xmi.metamodel.interfaces.XMISerializable;
+
+public class UMLDependencyClient implements XMISerializable {
 
     private UMLClass umlclass;
 
@@ -16,6 +18,13 @@ public class UMLDependencyClient {
         this.umlclass = umlclass;
     }
     
-    
+    @Override
+    public String toXmi() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("<UML:Dependency.client>\n");
+        sb.append(umlclass.toXmi());
+        sb.append("</UML:Dependency.client>\n");
+        return sb.toString();
+    }
 
 }

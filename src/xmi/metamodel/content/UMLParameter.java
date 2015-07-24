@@ -1,16 +1,14 @@
 package xmi.metamodel.content;
 
-import java.util.ArrayList;
-import java.util.List;
+import xmi.metamodel.interfaces.XMISerializable;
 
+public class UMLParameter implements XMISerializable {
 
-public class UMLParameter {
-
-    public String id;
-    public String name;
-    public boolean isSpecification;
-    public String kind;
-    public UMLParameterType parameterType;
+    private String id;
+    private String name;
+    private boolean isSpecification;
+    private String kind;
+    private UMLParameterType parameterType;
 
     public UMLParameter(String id, String name, boolean isSpecification, String kind) {
         this.id = id;
@@ -59,9 +57,13 @@ public class UMLParameter {
         this.parameterType = parameterType;
     }
 
+    @Override
+    public String toXmi() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("<UML:Parameter xmi.id = '").append(id).append("' name = '").append(name).append("' isSpecification = '").append(isSpecification).append("' kind = '").append(kind).append("'>\n");
+        sb.append(parameterType.toXmi());
+        sb.append("</UML:Parameter>\n");
+        return sb.toString();
+    }
     
-    
-    
-    
-
 }

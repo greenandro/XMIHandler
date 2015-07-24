@@ -1,9 +1,10 @@
 package xmi.metamodel.content;
 
 import xmi.metamodel.interfaces.XMIReferenceable;
+import xmi.metamodel.interfaces.XMISerializable;
 
 
-public class UMLInterface implements XMIReferenceable {
+public class UMLInterface implements XMIReferenceable, XMISerializable {
 
     private String id;
     private String name;
@@ -110,6 +111,19 @@ public class UMLInterface implements XMIReferenceable {
     @Override
     public String toString() {
         return name;
+    }
+    
+    @Override
+    public String toXmi() {
+        StringBuilder sb = new StringBuilder();
+        if(idref!=null) {
+            sb.append("<UML:Interface xmi.idref = '").append(idref).append("'");
+        } else {
+            sb.append("<UML:Interface xmi.id = '").append(id).append("' name = '").append(name).append("' visibility = '").append(visibility).append("' isSpecification = '").append(isSpecification).append("' isRoot = '").append(isRoot).append("' isLeaf = '").append(isLeaf).append("' isAbstract = '").append(isAbstract).append("'>");
+            sb.append(classifierFeature.toXmi());
+            sb.append("</UML:Interface>");
+        }
+        return sb.toString();
     }
     
 }

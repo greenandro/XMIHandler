@@ -1,19 +1,28 @@
 package xmi.metamodel.content;
 
-public class UMLDataType {
+import xmi.metamodel.interfaces.XMISerializable;
 
-    private String url;
+public class UMLDataType implements XMISerializable{
 
-    public UMLDataType(String url) {
-        this.url = url;
+    private String href;
+
+    public UMLDataType(String href) {
+        this.href = href;
     }
 
-    public String getUrl() {
-        return url;
+    public String getHref() {
+        return href;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setHref(String href) {
+        this.href = href;
+    }
+    
+    @Override
+    public String toXmi() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("<UML:DataType href = '").append(href).append("'/>\n");
+        return sb.toString();
     }
     
 }

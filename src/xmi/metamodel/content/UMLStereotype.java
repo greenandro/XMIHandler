@@ -1,8 +1,9 @@
 package xmi.metamodel.content;
 
 import xmi.metamodel.interfaces.XMIReferenceable;
+import xmi.metamodel.interfaces.XMISerializable;
 
-public class UMLStereotype implements XMIReferenceable {
+public class UMLStereotype implements XMIReferenceable, XMISerializable {
 
     private String id;
     private String name;
@@ -97,7 +98,20 @@ public class UMLStereotype implements XMIReferenceable {
         this.stereotypeBaseClasses = stereotypeBaseClasses;
     }
     
-    
+    @Override
+    public String toXmi() {
+        StringBuilder sb = new StringBuilder();
+        if(idref!=null) {
+            sb.append("<UML:Stereotype xmi.idref = '").append(idref).append("'/>");
+        } else {
+            sb.append("<UML:Stereotype xmi.id = '").append(id).append("' name = '").append(name)
+                    .append("' isSpecification = '").append(isSpecification).append("' isRoot = '").append(isRoot)
+                    .append("' isLeaf = '").append(isLeaf).append("' isAbstract = '").append(isAbstract).append("'>");
+            sb.append(stereotypeBaseClasses.toXmi());
+            sb.append("</UML:Stereotype>");
+        }
+        return sb.toString();
+    }
     
     
 

@@ -244,10 +244,10 @@ class ArgoUMLHandler extends DefaultHandler implements XMIHandler {
                         attributes.getValue("aggregation"), 
                         attributes.getValue("targetScope"), 
                         attributes.getValue("changeability"));
-                if(mAssociation.getAssociationConnections().getAssociationEnd1() == null) {
-                    mAssociation.getAssociationConnections().setAssociationEnd1(mAssociationEnd);
+                if(mAssociation.getAssociationConnection().getAssociationEnd1() == null) {
+                    mAssociation.getAssociationConnection().setAssociationEnd1(mAssociationEnd);
                 } else {
-                    mAssociation.getAssociationConnections().setAssociationEnd2(mAssociationEnd);
+                    mAssociation.getAssociationConnection().setAssociationEnd2(mAssociationEnd);
                 }
                 break;
                 
@@ -258,7 +258,7 @@ class ArgoUMLHandler extends DefaultHandler implements XMIHandler {
                     g.setGeneralizations(gn);
                     mclass.getGeneralizableElementGeneralizations().add(g);
                 } else {
-                    mGeneralization = new UMLGeneralization(null, null);
+                    mGeneralization = new UMLGeneralization(attributes.getValue("xmi.id"), Boolean.parseBoolean("isSpecification"), null, null);
                     mpackage.getNamespaceOwnedElement().getGeneratlizations().add(mGeneralization);
                 }
                 break;
@@ -403,7 +403,7 @@ class ArgoUMLHandler extends DefaultHandler implements XMIHandler {
             case "UML:ModelElement.stereotype":
                 UMLStereotype st = new UMLStereotype(refId);
                 UMLModelElementStereotype s = new UMLModelElementStereotype(st);
-                mAbstraction.getModelElementStereotypes().add(s);
+                mAbstraction.setModelElementStereotype(s);
                 break;
                 
                 

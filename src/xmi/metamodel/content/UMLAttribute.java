@@ -1,7 +1,9 @@
 package xmi.metamodel.content;
 
+import xmi.metamodel.interfaces.XMISerializable;
 
-public class UMLAttribute {
+
+public class UMLAttribute implements XMISerializable {
 
     private String id;
     private String name;
@@ -11,8 +13,8 @@ public class UMLAttribute {
     private String changeability;
     private String targetScope;
     
-    public UMLStructuralFeatureMulticiply structuralFeatureMultiplicity;
-    public UMLStructuralFeatureType structuralFeatureType;
+    private UMLStructuralFeatureMulticiply structuralFeatureMultiplicity;
+    private UMLStructuralFeatureType structuralFeatureType;
 
     public UMLAttribute(String id, String name, String visibility, boolean isSpecification, String ownerScope, String changeability, String targetScope) {
         this.id = id;
@@ -25,9 +27,7 @@ public class UMLAttribute {
         this.structuralFeatureMultiplicity = null;
         this.structuralFeatureType = new UMLStructuralFeatureType();
     }
-
-    
-    
+   
     
     public UMLAttribute() {
         this.structuralFeatureMultiplicity = null;
@@ -49,10 +49,6 @@ public class UMLAttribute {
     public void setStructuralFeatureType(UMLStructuralFeatureType structuralFeatureType) {
         this.structuralFeatureType = structuralFeatureType;
     }
-
-    
-
-    
 
     public String getId() {
         return id;
@@ -110,6 +106,17 @@ public class UMLAttribute {
         this.targetScope = targetScope;
     }
     
-    
+    @Override
+    public String toXmi() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("<UML:Attribute xmi.id = '").append(id)
+                .append("' name = '").append(name).append("' visibility = '").append(visibility)
+                .append("' isSpecification = '").append(isSpecification).append("' ownerScope = '").append(ownerScope)
+                .append("' changeability = '").append(changeability).append("' targetScope = '").append(targetScope).append("'>");
+        sb.append(structuralFeatureMultiplicity.toXmi());
+        sb.append(structuralFeatureType.toXmi());
+        sb.append("</UML:Attribute>");
+        return sb.toString();
+    }
     
 }

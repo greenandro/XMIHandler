@@ -1,13 +1,13 @@
 package xmi.metamodel.content;
 
-import java.util.Map;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import xmi.metamodel.interfaces.XMISerializable;
+import java.util.Map;
 import xmi.metamodel.interfaces.XMIReferenceable;
+import xmi.metamodel.interfaces.XMISerializable;
 
-public class UMLClass implements XMISerializable, XMIReferenceable {
+public class UMLClass implements XMIReferenceable, XMISerializable {
 
     private String idref;
     
@@ -149,8 +149,17 @@ public class UMLClass implements XMISerializable, XMIReferenceable {
 
     @Override
     public String toXmi() {
-        return "";
+        StringBuilder sb = new StringBuilder();
+        sb.append("<UML:Class xmi.id = '-64--88-69--27--457a683f:14e964ecb1e:-8000:0000000000000A4D' name = 'UMLInterface' visibility = 'public' isSpecification = 'false' isRoot = 'false' isLeaf = 'false' isAbstract = 'false' isActive = 'false'>\n");
+        for(UMLGeneralizableElementGeneralization g : generalizableElementGeneralizations) {
+            sb.append(g.toXmi());
+        }
+        for(UMLModelElementClientDependency d : modelElementClientDependency) {
+            sb.append(d.toXmi());
+        }
+        sb.append(classifierFeature.toXmi());
+        sb.append("</UML:Class>\n");
+        return sb.toString();
     }
-    
     
 }

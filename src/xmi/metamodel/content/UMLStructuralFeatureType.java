@@ -1,9 +1,11 @@
 package xmi.metamodel.content;
 
-public class UMLStructuralFeatureType {
+import xmi.metamodel.interfaces.XMISerializable;
 
-    public UMLDataType dataType;
-    public UMLDataType umlclasse;
+public class UMLStructuralFeatureType implements XMISerializable{
+
+    private UMLDataType dataType;
+    private UMLClass umlclasse;
     
     public String holder;
 
@@ -15,11 +17,11 @@ public class UMLStructuralFeatureType {
         this.dataType = dataType;
     }
 
-    public UMLDataType getUmlclass() {
+    public UMLClass getUmlclass() {
         return umlclasse;
     }
 
-    public void setUmlclass(UMLDataType umlclasses) {
+    public void setUmlclass(UMLClass umlclasses) {
         this.umlclasse = umlclasses;
     }
 
@@ -31,10 +33,17 @@ public class UMLStructuralFeatureType {
         this.holder = holder;
     }
 
-    
-
-    
-    
-    
+    @Override
+    public String toXmi() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("<UML:StructuralFeature.type>");
+        if(dataType!=null) {
+            sb.append(dataType.toXmi());
+        } else if(umlclasse!=null) {
+            sb.append(umlclasse.toXmi());    
+        }
+        sb.append("</UML:StructuralFeature.type>");
+        return sb.toString();
+    }
 
 }

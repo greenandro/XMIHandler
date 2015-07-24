@@ -1,15 +1,17 @@
 package xmi.metamodel.content;
 
-public class UMLAssociationEnd {
+import xmi.metamodel.interfaces.XMISerializable;
 
-    public String id;
-    public String visibility;
-    public boolean isSpecification;
-    public boolean isNavigable;
-    public String ordering;
-    public String aggregation;
-    public String targetScope;
-    public String changeability;
+public class UMLAssociationEnd implements XMISerializable {
+
+    private String id;
+    private String visibility;
+    private boolean isSpecification;
+    private boolean isNavigable;
+    private String ordering;
+    private String aggregation;
+    private String targetScope;
+    private String changeability;
 
     private UMLAssociationEndParticipant associationEndParticipants;    
     private UMLAssociationEndMultiplicity associationEndMultiplicities;
@@ -105,6 +107,18 @@ public class UMLAssociationEnd {
         this.associationEndMultiplicities = associationEndMultiplicities;
     }
 
+    @Override
+    public String toXmi() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("<UML:AssociationEnd xmi.id = '").append(id).append("' visibility = '")
+            .append(visibility).append("' isSpecification = '").append(isSpecification)
+            .append("' isNavigable = '").append(isNavigable).append("' ordering = '").append(ordering)
+            .append("' aggregation = '").append(aggregation).append("' targetScope = '").append(targetScope)
+            .append("' changeability = '").append(changeability).append("'>\n");
+        sb.append(associationEndParticipants.toXmi());
+        sb.append(associationEndMultiplicities.toXmi());
+        sb.append("</UML:AssociationEnd>\n");        
+        return sb.toString();
+    }
     
-
 }

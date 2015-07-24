@@ -1,6 +1,8 @@
 package xmi.metamodel.content;
 
-public class UMLMultiplicity {
+import xmi.metamodel.interfaces.XMISerializable;
+
+public class UMLMultiplicity implements XMISerializable {
 
     private String id;
     private UMLMultiplicityRange  multiplicityRange;
@@ -24,6 +26,15 @@ public class UMLMultiplicity {
 
     public void setId(String id) {
         this.id = id;
+    }
+    
+    @Override
+    public String toXmi() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("<UML:Multiplicity xmi.id = '").append(id).append("'>");
+        sb.append(multiplicityRange.toXmi());
+        sb.append("</UML:Multiplicity>");
+        return sb.toString();
     }
     
 }

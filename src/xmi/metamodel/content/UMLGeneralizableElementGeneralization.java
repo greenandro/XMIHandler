@@ -1,6 +1,8 @@
 package xmi.metamodel.content;
 
-public class UMLGeneralizableElementGeneralization {
+import xmi.metamodel.interfaces.XMISerializable;
+
+public class UMLGeneralizableElementGeneralization implements XMISerializable {
 
     private UMLGeneralization  generalizations;
 
@@ -15,6 +17,12 @@ public class UMLGeneralizableElementGeneralization {
         this.generalizations = generalizations;
     }
 
-    
-    
+    @Override
+    public String toXmi() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("<UML:GeneralizableElement.generalization>\n");
+        sb.append(generalizations.toXmi());
+        sb.append("</UML:GeneralizableElement.generalization>\n");
+        return sb.toString();
+    }
 }

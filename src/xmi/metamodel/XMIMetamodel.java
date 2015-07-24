@@ -1,7 +1,9 @@
 package xmi.metamodel;
 
+import xmi.metamodel.interfaces.XMISerializable;
 
-public class XMIMetamodel {
+
+public class XMIMetamodel implements XMISerializable {
 
     private String xmiName;
     private String xmiVersion;
@@ -29,5 +31,12 @@ public class XMIMetamodel {
     public void setXmiVersion(String xmiVersion) {
         this.xmiVersion = xmiVersion;
     }
-  
+
+    @Override
+    public String toXmi() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("<XMI.metamodel xmi.name=\"").append(xmiName).append("\" xmi.version=\"").append(xmiVersion).append("\"/>");
+        return sb.toString();
+    }
+    
 }

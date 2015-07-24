@@ -2,11 +2,12 @@ package xmi.metamodel.content;
 
 import java.util.ArrayList;
 import java.util.List;
+import xmi.metamodel.interfaces.XMISerializable;
 
-public class UMLParameterType {
+public class UMLParameterType implements XMISerializable {
 
-    public List<UMLDataType> dataTypes;
-    public List<UMLClass>  umlclasses;
+    private List<UMLDataType> dataTypes;
+    private List<UMLClass>  umlclasses;
 
     public UMLParameterType(UMLClass umlclass) {
         dataTypes = new ArrayList<>();
@@ -34,7 +35,18 @@ public class UMLParameterType {
     }
     
     
+    @Override
+    public String toXmi() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("<UML:Parameter.type>");
+        for(UMLDataType d : dataTypes) {
+            sb.append(d.toXmi());
+        }
+        for(UMLClass c : umlclasses) {
+            sb.append(c.toXmi());
+        }
+        sb.append("</UML:Parameter.type>");
+        return sb.toString();
+    }
     
-    
-
 }

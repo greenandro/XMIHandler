@@ -2,6 +2,7 @@ package xmi.metamodel.content;
 
 import java.util.ArrayList;
 import java.util.List;
+import xmi.metamodel.interfaces.XMISerializable;
 
 /*
  * UMLNamespaceOwnedElement
@@ -12,7 +13,7 @@ import java.util.List;
  *
  * @author ruicouto
  */
-public class UMLNamespaceOwnedElement {
+public class UMLNamespaceOwnedElement implements XMISerializable {
     
     private List<UMLPackage> packages;
     private List<UMLClass> classes;
@@ -108,7 +109,34 @@ public class UMLNamespaceOwnedElement {
         return stereotypes;
     }
    
-    
+    @Override
+    public String toXmi() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("<UML:Namespace.ownedElement>");
+        for(UMLPackage p : packages) {
+            sb.append(p.toXmi());
+        }
+        for(UMLClass c : classes) {
+            sb.append(c.toXmi());
+        }
+        for(UMLAssociation a : associations) {
+            sb.append(a.toXmi());
+        }
+        for(UMLGeneralization g : generatlizations) {
+            sb.append(g.toXmi());
+        }
+        for(UMLInterface i : interfaces) {
+            sb.append(i.toXmi());
+        }
+        for(UMLAbstraction a : abstractions) {
+            sb.append(a.toXmi());
+        }
+        for(UMLStereotype s : stereotypes ) {
+            sb.append(s.toXmi());
+        }
+        sb.append("</UML:Namespace.ownedElement>");
+        return sb.toString();
+    }
     
     
     

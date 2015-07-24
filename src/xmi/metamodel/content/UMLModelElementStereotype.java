@@ -1,19 +1,30 @@
 package xmi.metamodel.content;
 
-public class UMLModelElementStereotype {
+import xmi.metamodel.interfaces.XMISerializable;
 
-    public UMLStereotype stereotypeE;
+public class UMLModelElementStereotype implements XMISerializable {
 
-    public UMLModelElementStereotype(UMLStereotype stereotypeE) {
-        this.stereotypeE = stereotypeE;
+    private UMLStereotype umlStereotype;
+
+    public UMLModelElementStereotype(UMLStereotype umlStereotype) {
+        this.umlStereotype = umlStereotype;
     }
 
-    public UMLStereotype getStereotypeE() {
-        return stereotypeE;
+    public UMLStereotype getUmlStereotype() {
+        return umlStereotype;
     }
 
-    public void setStereotypeE(UMLStereotype stereotypeE) {
-        this.stereotypeE = stereotypeE;
+    public void setUmlStereotype(UMLStereotype umlStereotype) {
+        this.umlStereotype = umlStereotype;
     }
     
+    @Override
+    public String toXmi() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("<UML:ModelElement.stereotype>\n");
+        sb.append(umlStereotype.toXmi());
+        sb.append("</UML:ModelElement.stereotype>\n");
+        return sb.toString();
+    }
+                      
 }

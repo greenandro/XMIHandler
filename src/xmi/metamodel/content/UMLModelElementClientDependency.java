@@ -1,6 +1,8 @@
 package xmi.metamodel.content;
 
-public class UMLModelElementClientDependency {
+import xmi.metamodel.interfaces.XMISerializable;
+
+public class UMLModelElementClientDependency implements XMISerializable {
 
     private UMLAbstraction umlAbstraction;
 
@@ -16,4 +18,12 @@ public class UMLModelElementClientDependency {
         this.umlAbstraction = umlAbstraction;
     }
   
+    @Override
+    public String toXmi() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("<UML:ModelElement.clientDependency>");
+        sb.append(umlAbstraction.toXmi());
+        sb.append("</UML:ModelElement.clientDependency>\n");
+        return sb.toString();
+    }    
 }

@@ -1,18 +1,20 @@
 package xmi.metamodel.content;
 
-public class UMLOperation {
+import xmi.metamodel.interfaces.XMISerializable;
 
-    public String id;
-    public String name;
-    public String visibility;
-    public boolean isSpecification;
-    public String ownerScope;
-    public boolean isQuery;
-    public String concurrency;
-    public boolean isRoot;
-    public boolean isLeaf;
-    public boolean isAbstract;
-    public UMLBehavioralFeatureParameter behavioralFeatureParameter;
+public class UMLOperation implements XMISerializable {
+
+    private String id;
+    private String name;
+    private String visibility;
+    private boolean isSpecification;
+    private String ownerScope;
+    private boolean isQuery;
+    private String concurrency;
+    private boolean isRoot;
+    private boolean isLeaf;
+    private boolean isAbstract;
+    private UMLBehavioralFeatureParameter behavioralFeatureParameter;
 
     public UMLOperation(String id, String name, String visibility, boolean isSpecification, String ownerScope, boolean isQuery, String concurrency, boolean isRoot, boolean isLeaf, boolean isAbstract) {
         this.id = id;
@@ -114,6 +116,19 @@ public class UMLOperation {
 
     public void setBehavioralFeatureParameter(UMLBehavioralFeatureParameter behavioralFeatureParameter) {
         this.behavioralFeatureParameter = behavioralFeatureParameter;
+    }
+    
+    @Override
+    public String toXmi() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("<UML:Operation xmi.id = '").append(id).append("' name = '").append(name).append("' visibility = '").append(visibility)
+                .append("' isSpecification = '").append(isSpecification).append("' ownerScope = '").append(ownerScope).append("' isQuery = '").append(isQuery)
+                .append("' concurrency = '").append(concurrency).append("' isRoot = '").append(isRoot)
+                .append("' isLeaf = '").append(isLeaf).append("' isAbstract = '").append(isAbstract).append("'>");
+        sb.append(behavioralFeatureParameter.toXmi());
+        sb.append("</UML:Operation>");
+        //).append().append(
+        return sb.toString();
     }
 
 }

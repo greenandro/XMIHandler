@@ -1,9 +1,8 @@
 package xmi.metamodel.content;
 
+import xmi.metamodel.interfaces.XMISerializable;
 
-
-
-public class UMLStructuralFeatureMulticiply {
+public class UMLStructuralFeatureMulticiply implements XMISerializable {
 
     private UMLMultiplicity  multiplicity;
 
@@ -19,7 +18,13 @@ public class UMLStructuralFeatureMulticiply {
         this.multiplicity = multiplicity;
     }
 
-    
-    
+    @Override
+    public String toXmi() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("<UML:StructuralFeature.multiplicity>");
+        sb.append(multiplicity.toXmi());
+        sb.append("</UML:StructuralFeature.multiplicity>");
+        return sb.toString();
+    }
     
 }

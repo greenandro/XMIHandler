@@ -1,6 +1,12 @@
 package xmi.metamodel.content;
 
-public class UMLGeneralizationParent {
+import xmi.metamodel.interfaces.XMISerializable;
+
+/**
+ * TODO: See UMLGeneralizationChild
+ * @author ruicouto
+ */
+public class UMLGeneralizationParent implements XMISerializable {
 
     private UMLClass umlClass;
 
@@ -16,4 +22,13 @@ public class UMLGeneralizationParent {
         this.umlClass = umlClass;
     }
       
+    @Override
+    public String toXmi() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("<UML:Generalization.parent>");
+        sb.append(umlClass.toXmi());
+        sb.append("</UML:Generalization.parent>");
+        return sb.toString();
+    }
+    
 }

@@ -1,7 +1,5 @@
 package xmi.metamodel.content;
 
-import java.util.ArrayList;
-import java.util.List;
 import xmi.metamodel.interfaces.XMIReferenceable;
 import xmi.metamodel.interfaces.XMISerializable;
 
@@ -24,7 +22,7 @@ public class UMLAbstraction implements XMIReferenceable, XMISerializable {
     /** The supplier, i.e. parent class */
     private UMLDependencySupplier  dependencySupplier;
     /** List of model element stereotypes */
-    private List<UMLModelElementStereotype>  modelElementStereotypes;
+    private UMLModelElementStereotype  modelElementStereotype;
     
     /**
      * Use this constructor to create a temporary class that holds a reference to
@@ -45,7 +43,7 @@ public class UMLAbstraction implements XMIReferenceable, XMISerializable {
         this.id = id;
         this.isSpecification = isSpecification;
         this.dependencyClient = new UMLDependencyClient();
-        this.modelElementStereotypes = new ArrayList<>();
+        this.modelElementStereotype = new UMLModelElementStereotype(null);
         this.dependencySupplier = new UMLDependencySupplier();
     }
     
@@ -117,10 +115,16 @@ public class UMLAbstraction implements XMIReferenceable, XMISerializable {
      * Get the model element stereotypes list
      * @return List of stereotypes
      */
-    public List<UMLModelElementStereotype> getModelElementStereotypes() {
-        return modelElementStereotypes;
+    public UMLModelElementStereotype getModelElementStereotype() {
+        return modelElementStereotype;
     }
 
+    public void setModelElementStereotype(UMLModelElementStereotype modelElementStereotype) {
+        this.modelElementStereotype = modelElementStereotype;
+    }
+
+    
+    
     @Override
     public String getIdref() {
         return idref;
@@ -137,7 +141,23 @@ public class UMLAbstraction implements XMIReferenceable, XMISerializable {
         if(idref==null) {
             sb.append("<UML:Abstraction xmi.idref = '").append(idref).append("'/>");
         } else {
-            
+            sb.append("<UML:Abstraction xmi.id = '").append(id).append("' isSpecification = '").append(isSpecification).append("'>");
+            if(modelElementStereotype!=null) {
+                sb.append("<UML:ModelElement.stereotype>");
+                sb.append("<UML:Stereotype xmi.idref = '").append(modelElementStereotype.getUmlStereotype().getId()).append("'/>");
+                sb.append("</UML:ModelElement.stereotype>");
+            }
+            if(dependencyClient != null) {
+                sb.append("<UML:Dependency.client>");
+                sb.append("<UML:Class xmi.idref = '").append(dependencyClient.getUmlclass().getId()).append("'/>");
+                sb.append("</UML:Dependency.client>");    
+            }
+            if(dependencySupplier!=null) {
+                sb.append("<UML:Dependency.supplier>");
+                sb.append("<UML:Interface xmi.idref = '").append(dependencySupplier.getUmlinterface().getId()).append("'/>");
+                sb.append("</UML:Dependency.supplier>");   
+            }
+            sb.append("</UML:Abstraction>");
         }
         return sb.toString();
     }

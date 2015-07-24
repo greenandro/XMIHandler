@@ -1,15 +1,16 @@
 package xmi.metamodel.content;
 
 import xmi.metamodel.interfaces.XMINamespaceOwner;
+import xmi.metamodel.interfaces.XMISerializable;
 
-public class UMLModel implements XMINamespaceOwner {
+public class UMLModel implements XMINamespaceOwner, XMISerializable {
 
-    public String id;
-    public String name;
-    public boolean isSpecification;
-    public boolean isRoot;
-    public boolean isLeaf;
-    public boolean isAbstract;
+    private String id;
+    private String name;
+    private boolean isSpecification;
+    private boolean isRoot;
+    private boolean isLeaf;
+    private boolean isAbstract;
 
     //public List<UMLPackage> packages;
     private UMLNamespaceOwnedElement ownedElement;
@@ -72,7 +73,6 @@ public class UMLModel implements XMINamespaceOwner {
         this.isAbstract = isAbstract;
     }
 
-
     @Override
     public UMLNamespaceOwnedElement getNamespaceOwnedElement() {
         return ownedElement;
@@ -83,4 +83,43 @@ public class UMLModel implements XMINamespaceOwner {
         this.ownedElement = namespaceOwnedElement;
     }
 
+    @Override
+    public String toXmi() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("<UML:Model xmi.id = '").append(id).append("' ")
+                .append("name = '").append(name).append("' isSpecification = '").append(isSpecification)
+                .append("' isRoot = '").append(isRoot).append("' isLeaf = '").append(isLeaf)
+                .append("isAbstract = '").append(isAbstract).append("'>\n");
+        
+        for(UMLAbstraction a : ownedElement.getAbstractions()) {
+            sb.append(a.toXmi());
+        }
+        
+        for(UMLAssociation a : ownedElement.getAssociations()) {
+            sb.append(a.toXmi());
+        }
+        
+        for(UMLClass c : ownedElement.getClasses()) {
+            sb.append(c.toXmi());
+        }
+        
+        for(UMLGeneralization g : ownedElement.getGeneratlizations()) {
+            sb.append(g.toXmi());
+        }
+        
+        for(UMLInterface i : ownedElement.getInterfaces()) {
+            sb.append(i.toXmi());
+        }
+        
+        for(UMLPackage p : ownedElement.getPackages()) {
+            
+        }
+        
+        for(UMLStereotype s : ownedElement.getStereotypes()) {
+            
+        }
+        sb.append("</UML:Model>\n");
+        return sb.toString();
+    }
+    
 }

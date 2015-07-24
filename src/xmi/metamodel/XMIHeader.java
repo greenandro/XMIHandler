@@ -1,9 +1,11 @@
 package xmi.metamodel;
 
-public class XMIHeader {
+import xmi.metamodel.interfaces.XMISerializable;
 
-    public XMIDocumentation documentation;
-    public XMIMetamodel metamodel;
+public class XMIHeader implements XMISerializable {
+
+    private XMIDocumentation documentation;
+    private XMIMetamodel metamodel;
 
     public XMIHeader() {
     }
@@ -28,4 +30,17 @@ public class XMIHeader {
     public void setMetamodel(XMIMetamodel metamodel) {
         this.metamodel = metamodel;
     }   
+
+    @Override
+    public String toXmi() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("<XMI.header>");
+        sb.append("<XMI.documentation>");
+        sb.append(documentation.toXmi());
+        sb.append("</XMI.documentation>");
+        sb.append(metamodel.toXmi());
+        sb.append("</XMI.header>");
+        return sb.toString();
+    }
+    
 }

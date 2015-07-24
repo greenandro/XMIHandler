@@ -1,10 +1,12 @@
 package xmi.metamodel.content;
 
+import xmi.metamodel.interfaces.XMISerializable;
+
 /**
  * Represent an UML association connection with two ends
  * @author ruicouto
  */
-public class UMLAssociationConnection {
+public class UMLAssociationConnection implements XMISerializable {
 
     /** The first end */
     private UMLAssociationEnd associationEnd1;
@@ -61,4 +63,14 @@ public class UMLAssociationConnection {
         this.associationEnd2 = associationEnd2;
     }
 
+    @Override
+    public String toXmi() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("<UML:Association.connection>\n");
+        sb.append(associationEnd1.toXmi());
+        sb.append(associationEnd2.toXmi());
+        sb.append("</UML:Association.connection>\n");
+        return sb.toString();
+    }
+    
 }

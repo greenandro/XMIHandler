@@ -1,9 +1,10 @@
 package xmi.metamodel.content;
 
 import xmi.metamodel.interfaces.XMINamespaceOwner;
+import xmi.metamodel.interfaces.XMISerializable;
 
 
-public class UMLPackage implements XMINamespaceOwner {
+public class UMLPackage implements XMINamespaceOwner, XMISerializable {
 
     private String id;
     private String name;
@@ -12,10 +13,7 @@ public class UMLPackage implements XMINamespaceOwner {
     private boolean isLeaf;
     private boolean isAbstract;
     
-    
     private UMLNamespaceOwnedElement ownedElement;
-    
-    
     
 
     public UMLPackage(String id, String name, boolean isSpecification, boolean isRoot, boolean isLeaf, boolean isAbstract) {
@@ -87,6 +85,17 @@ public class UMLPackage implements XMINamespaceOwner {
     @Override
     public void setNamespaceOwnedElement(UMLNamespaceOwnedElement namespaceOwnedElement) {
         this.ownedElement = namespaceOwnedElement;
+    }
+    
+    @Override
+    public String toXmi() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("<UML:Package xmi.id = '").append(id).append("'  name = '").append(name)
+                .append("' isSpecification = '").append(isSpecification).append("' isRoot = '").append(isRoot)
+                .append("' isLeaf = '").append(isLeaf).append("' isAbstract = '").append(isAbstract).append("'>");
+        sb.append(ownedElement.toXmi());
+        sb.append("</UML:Package>");
+        return sb.toString();
     }
     
     

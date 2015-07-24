@@ -1,6 +1,8 @@
 package xmi.metamodel.content;
 
-public class UMLAssociation {
+import xmi.metamodel.interfaces.XMISerializable;
+
+public class UMLAssociation implements XMISerializable {
 
     private String id;
     private String name;
@@ -8,7 +10,7 @@ public class UMLAssociation {
     private boolean isRoot;
     private boolean isLeaf;
     private boolean isAbstract;
-    private UMLAssociationConnection associationConnections;
+    private UMLAssociationConnection associationConnection;
 
     public UMLAssociation(String id, String name, boolean isSpecification, boolean isRoot, boolean isLeaf, boolean isAbstract) {
         this.id = id;
@@ -17,7 +19,7 @@ public class UMLAssociation {
         this.isRoot = isRoot;
         this.isLeaf = isLeaf;
         this.isAbstract = isAbstract;
-        this.associationConnections = new UMLAssociationConnection();
+        this.associationConnection = new UMLAssociationConnection();
     }
 
     public String getId() {
@@ -68,12 +70,22 @@ public class UMLAssociation {
         this.isAbstract = isAbstract;
     }
 
-    public UMLAssociationConnection getAssociationConnections() {
-        return associationConnections;
+    public UMLAssociationConnection getAssociationConnection() {
+        return associationConnection;
     }
 
-    public void setAssociationConnections(UMLAssociationConnection associationConnections) {
-        this.associationConnections = associationConnections;
+    public void setAssociationConnection(UMLAssociationConnection associationConnection) {
+        this.associationConnection = associationConnection;
     }
-    
+
+    @Override
+    public String toXmi() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("<UML:Association xmi.id = '").append(id).append("' name = '").append(name)
+                .append("' isSpecification = '").append(isSpecification).append("' isRoot = '").append(isRoot)
+                .append("' isLeaf = '").append(isLeaf).append("' isAbstract = '").append(isAbstract).append("'>");
+        sb.append(associationConnection.toXmi());
+        sb.append("</UML:Association>");
+        return sb.toString();
+    }
 }

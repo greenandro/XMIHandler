@@ -274,18 +274,23 @@ class ArgoUMLHandler extends DefaultHandler implements XMIHandler {
                     ownedElement.getAbstractions().add(mAbstraction);
                 }
                 break;
-            
+                            
             case "UML:Interface":
-                mInterface = new UMLInterface( attributes.getValue("xmi.id"), 
-                            attributes.getValue("name"), 
-                            attributes.getValue("visibility"), 
-                            Boolean.parseBoolean(attributes.getValue("isSpecification")), 
-                            Boolean.parseBoolean(attributes.getValue("isRoot")), 
-                            Boolean.parseBoolean(attributes.getValue("isLeaf")), 
-                            Boolean.parseBoolean(attributes.getValue("isAbstract")));
-                if(mAbstraction==null) {
-                    //mpackage.getNamespaceOwnedElement().getInterfaces().add(mInterface);
-                    ownedElement.getInterfaces().add(mInterface);
+                if (attributes.getLength() > 1) {
+                    mInterface = new UMLInterface( attributes.getValue("xmi.id"), 
+                                attributes.getValue("name"), 
+                                attributes.getValue("visibility"), 
+                                Boolean.parseBoolean(attributes.getValue("isSpecification")), 
+                                Boolean.parseBoolean(attributes.getValue("isRoot")), 
+                                Boolean.parseBoolean(attributes.getValue("isLeaf")), 
+                                Boolean.parseBoolean(attributes.getValue("isAbstract")));
+                    if(mAbstraction==null) {
+                        //mpackage.getNamespaceOwnedElement().getInterfaces().add(mInterface);
+                        ownedElement.getInterfaces().add(mInterface);
+                    }
+                } else {
+                    lastTag = "umlinterfaceref";
+                    refId = attributes.getValue("xmi.idref");
                 }
                 break;
                 
@@ -350,7 +355,11 @@ class ArgoUMLHandler extends DefaultHandler implements XMIHandler {
                 
                 
             case "UML:AssociationEnd.participant":
-                mAssociationEnd.setAssociationEndParticipants(new UMLAssociationEndParticipant(new UMLClass(refId), null));
+                if(lastTag.equals("umlclassref")) {
+                    mAssociationEnd.setAssociationEndParticipants(new UMLAssociationEndParticipant(new UMLClass(refId), null));
+                } else if(lastTag.equals("umlinterfaceref")) {
+                    mAssociationEnd.setAssociationEndParticipants(new UMLAssociationEndParticipant(null, new UMLInterface(refId)));
+                }
                 break;
                 
                 

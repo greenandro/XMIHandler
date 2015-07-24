@@ -5,20 +5,20 @@ import xmi.metamodel.interfaces.XMIReferenceable;
 
 public class UMLInterface implements XMIReferenceable {
 
-    public String id;
-    public String name;
-    public String visibility;
-    public boolean isSpecification;
-    public boolean isRoot;
-    public boolean isLeaf;
-    public boolean isAbstract;
+    private String id;
+    private String name;
+    private String visibility;
+    private boolean isSpecification;
+    private boolean isRoot;
+    private boolean isLeaf;
+    private boolean isAbstract;
     
-    private String refId;
+    private String idref;
 
-    public UMLClassifierFeature classifierFeature;
+    private UMLClassifierFeature classifierFeature;
 
-    public UMLInterface(String refId) {
-        this.refId = refId;
+    public UMLInterface(String idref) {
+        this.idref = idref;
     }
     
     public UMLInterface(String id, String name, String visibility, boolean isSpecification, boolean isRoot, boolean isLeaf, boolean isAbstract) {
@@ -33,13 +33,13 @@ public class UMLInterface implements XMIReferenceable {
     }
 
     @Override
-    public String getRefId() {
-        return refId;
+    public String getIdref() {
+        return idref;
     }
 
     @Override
-    public void setRefId(String refId) {
-        this.refId = refId;
+    public void setIdref(String refId) {
+        this.idref = idref;
     }
     
     public String getId() {

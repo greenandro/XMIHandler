@@ -11,15 +11,14 @@ public class UMLStereotype implements XMIReferenceable {
     private boolean isLeaf;
     private boolean isAbstract;
     
-    private String refId;
+    private String idref;
 
     private UMLStereotypeBaseClass stereotypeBaseClasses;
 
-    public UMLStereotype(String refId) {
-        this.refId = refId;
+    public UMLStereotype(String idref) {
+        this.idref = idref;
     }
-    
-    
+        
     public UMLStereotype(String id, String name, boolean isSpecification, boolean isRoot, boolean isLeaf, boolean isAbstract, UMLStereotypeBaseClass stereotypeBaseClasses) {
         this.id = id;
         this.name = name;
@@ -31,13 +30,13 @@ public class UMLStereotype implements XMIReferenceable {
     }
 
     @Override
-    public String getRefId() {
-        return refId;
+    public String getIdref() {
+        return idref;
     }
 
     @Override
-    public void setRefId(String refId) {
-        this.refId = refId;
+    public void setIdref(String idref) {
+        this.idref = idref;
     }
 
     

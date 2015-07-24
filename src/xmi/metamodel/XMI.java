@@ -8,6 +8,8 @@ public class XMI {
     private XMIContent content;
 
     public XMI() {
+        header = new XMIHeader();
+        content = new XMIContent();
     }
 
     

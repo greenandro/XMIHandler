@@ -9,7 +9,7 @@ import xmi.metamodel.interfaces.XMIReferenceable;
 
 public class UMLClass implements XMISerializable, XMIReferenceable {
 
-    private String refId;
+    private String idref;
     
     private String id;
     private String name;
@@ -26,21 +26,9 @@ public class UMLClass implements XMISerializable, XMIReferenceable {
     private List<UMLModelElementClientDependency> modelElementClientDependency;
     private Map<String,String> otherProperties;
 
-    public UMLClass(String refId) {
-        this.refId = refId;
+    public UMLClass(String idref) {
+        this.idref = idref;
     }
-
-    @Override
-    public String getRefId() {
-        return refId;
-    }
-
-    @Override
-    public void setRefId(String refId) {
-        this.refId = refId;
-    }
-
-    
 
     public UMLClass(String id, String name, String visibility, boolean isSpecification, boolean isRoot, boolean isLeaf, boolean isAbstract, boolean isActive) {
         this.id = id;
@@ -55,6 +43,18 @@ public class UMLClass implements XMISerializable, XMIReferenceable {
         this.generalizableElementGeneralizations = new ArrayList<>();
         this.modelElementClientDependency = new ArrayList<>();
         this.classifierFeature = new UMLClassifierFeature();
+    }
+
+    @Override
+    public String getIdref() {
+        return idref;
+    }
+
+    
+
+    @Override
+    public void setIdref(String refId) {
+        this.idref = refId;
     }
 
     public String getId() {

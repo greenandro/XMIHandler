@@ -15,7 +15,7 @@ public class XMIContent {
     public XMIContent() {
         models = new ArrayList<>();
     }
-
+    
     public List<UMLModel> getModels() {
         return models;
     }

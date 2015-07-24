@@ -106,7 +106,7 @@ public class Parser {
                         System.out.println("--- Generalizations ---");
                         ///***/// Generalizations
                         p1.getNamespaceOwnedElement().getGeneratlizations().forEach(g -> {
-                            System.out.println(g.getChild().getUmlClass().getRefId() + " -> " + g.getParent().getUmlClass().getRefId());
+                            System.out.println(g.getChild().getUmlClass().getIdref() + " -> " + g.getParent().getUmlClass().getIdref());
                         });
                         
                         
@@ -119,8 +119,8 @@ public class Parser {
                         System.out.println("---Abstractions---");
                         ///***/// Abstractions
                         p1.getNamespaceOwnedElement().getAbstractions().forEach(a -> {
-                            System.out.println(a.getDependencyClient().getUmlclass().getRefId()+ ", " + 
-                                    a.getDependencySupplier().getUmlinterface().getRefId());
+                            System.out.println(a.getDependencyClient().getUmlclass().getIdref()+ ", " + 
+                                    a.getDependencySupplier().getUmlinterface().getIdref());
                         });
                         
                         System.out.println("---Stereotypes---");

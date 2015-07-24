@@ -13,11 +13,11 @@ public interface XMIReferenceable {
      * If this class is a reference, returns the id which it is referring to.
      * @return The concrete class id
      */
-    public String getRefId();
+    public String getIdref();
     
     /**
      * Define the id of the concrete class.
-     * @param refId The id of the concrete class
+     * @param idref The id of the concrete class
      */
-    public void setRefId(String refId);
+    public void setIdref(String idref);
 }

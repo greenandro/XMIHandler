@@ -4,31 +4,28 @@ import xmi.metamodel.interfaces.XMIReferenceable;
 
 public class UMLGeneralization implements XMIReferenceable {
 
-    private String refId;
+    private String idref;
     
     private UMLGeneralizationParent parent;
     private UMLGeneralizationChild child;
 
-    public UMLGeneralization(String refId) {
-        this.refId = refId;
+    public UMLGeneralization(String idref) {
+        this.idref = idref;
     }
 
-    @Override
-    public String getRefId() {
-        return this.refId;
-    }
-
-    @Override
-    public void setRefId(String refId) {
-        this.refId = refId;
-    }
-    
-
-    
-    
     public UMLGeneralization(UMLGeneralizationParent parent, UMLGeneralizationChild child) {
         this.parent = parent;
         this.child = child;
+    }
+
+    @Override
+    public String getIdref() {
+        return this.idref;
+    }
+    
+    @Override
+    public void setIdref(String idref) {
+        this.idref = idref;
     }
 
     public UMLGeneralizationChild getChild() {

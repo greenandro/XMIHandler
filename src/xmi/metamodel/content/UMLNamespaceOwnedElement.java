@@ -34,6 +34,52 @@ public class UMLNamespaceOwnedElement {
         this.stereotypes = new ArrayList<>();
     }
 
+    /**
+     * Check if the class with the given name exists
+     * @param className
+     * @return 
+     */
+    public boolean containsClass(String className) {
+        return getClass(className) != null;
+    }
+    
+    /**
+     * Get a class for a given name
+     * @param className
+     * @return 
+     */
+    public UMLClass getClass(String className) {
+        for(UMLClass c : classes) {
+            if(c.getName().equals(className)) {
+                return c;
+            }
+        }
+        return null;
+    }
+    
+    /**
+     * Check if the interface with the given name exists
+     * @param interfaceName
+     * @return 
+     */
+    public boolean containsInterface(String interfaceName) {
+        return getInterface(interfaceName) != null;
+    }
+    
+    /**
+     * Get an interface for a given name
+     * @param interfaceName
+     * @return 
+     */
+    public UMLInterface getInterface(String interfaceName) {
+        for(UMLInterface i : interfaces) {
+            if(i.getName().equals(interfaceName)) {
+                return i;
+            }
+        }
+        return null;
+    }
+    
     public List<UMLClass> getClasses() {
         return classes;
     }

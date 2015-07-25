@@ -138,7 +138,7 @@ public class UMLAbstraction implements XMIReferenceable, XMISerializable {
     @Override
     public String toXmi() {
         StringBuilder sb = new StringBuilder();
-        if(idref==null) {
+        if(idref!=null) {
             sb.append("<UML:Abstraction xmi.idref = '").append(idref).append("'/>\n");
         } else {
             sb.append("<UML:Abstraction xmi.id = '").append(id).append("' isSpecification = '").append(isSpecification).append("'>\n");
@@ -149,12 +149,12 @@ public class UMLAbstraction implements XMIReferenceable, XMISerializable {
             }
             if(dependencyClient != null) {
                 sb.append("<UML:Dependency.client>\n");
-                sb.append("<UML:Class xmi.idref = '").append(dependencyClient.getUmlclass().getId()).append("'/>\n");
+                sb.append("<UML:Class xmi.idref = '").append(dependencyClient.getUmlclass().getIdref()).append("'/>\n");
                 sb.append("</UML:Dependency.client>\n");    
             }
             if(dependencySupplier!=null) {
                 sb.append("<UML:Dependency.supplier>\n");
-                sb.append("<UML:Interface xmi.idref = '").append(dependencySupplier.getUmlinterface().getId()).append("'/>\n");
+                sb.append("<UML:Interface xmi.idref = '").append(dependencySupplier.getUmlinterface().getIdref()).append("'/>\n");
                 sb.append("</UML:Dependency.supplier>\n");   
             }
             sb.append("</UML:Abstraction>\n");

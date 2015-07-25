@@ -276,10 +276,12 @@ class ArgoUMLHandler extends DefaultHandler implements XMIHandler {
             
             case "UML:Abstraction":
                 if(mclass!=null) {
+                    System.out.println("---!");
                     mAbstraction= new UMLAbstraction(attributes.getValue("xmi.idref"));
                     UMLModelElementClientDependency cd = new UMLModelElementClientDependency(mAbstraction);
                     mclass.getModelElementClientDependency().add(cd);
                 } else {
+                    System.out.println("---¡");
                     mAbstraction = new UMLAbstraction(attributes.getValue("xmi.id"), Boolean.parseBoolean(attributes.getValue("isSpecification")));
                     //mpackage.getNamespaceOwnedElement().getAbstractions().add(mAbstraction);
                     ownedElement.getAbstractions().add(mAbstraction);
@@ -391,7 +393,9 @@ class ArgoUMLHandler extends DefaultHandler implements XMIHandler {
                 break;               
                 
             case "UML:Class":
-                if(tags.peek().equals("UML:Class")) {
+                System.out.println(tags.peek());
+                if( (tags.peek().equals("UML:Abstraction") && tags.get(tags.size()-3).equals("UML:Class")) || 
+                        tags.peek().equals("UML:Class") ) {
                     mclass = null;
                 }
                 break;

@@ -150,15 +150,24 @@ public class UMLClass implements XMIReferenceable, XMISerializable {
     @Override
     public String toXmi() {
         StringBuilder sb = new StringBuilder();
-        sb.append("<UML:Class xmi.id = '-64--88-69--27--457a683f:14e964ecb1e:-8000:0000000000000A4D' name = 'UMLInterface' visibility = 'public' isSpecification = 'false' isRoot = 'false' isLeaf = 'false' isAbstract = 'false' isActive = 'false'>\n");
-        for(UMLGeneralizableElementGeneralization g : generalizableElementGeneralizations) {
-            sb.append(g.toXmi());
+        if(idref!=null) {
+            sb.append("<UML:Class xmi.idref = '").append(idref).append("'/>\n");
+        } else {
+            sb.append("<UML:Class xmi.id = '").append(id)
+                    .append("' name = '").append(name)
+                    .append("' visibility = '").append(visibility)
+                    .append("' isSpecification = '").append(isSpecification).append("' isRoot = '").append(isRoot)
+                    .append("' isLeaf = '").append(isLeaf)
+                    .append("' isAbstract = '").append(isAbstract).append("' isActive = '").append(isActive).append("'>\n");
+            for(UMLGeneralizableElementGeneralization g : generalizableElementGeneralizations) {
+                sb.append(g.toXmi());
+            }
+            for(UMLModelElementClientDependency d : modelElementClientDependency) {
+                sb.append(d.toXmi());
+            }
+            sb.append(classifierFeature.toXmi());
+            sb.append("</UML:Class>\n");
         }
-        for(UMLModelElementClientDependency d : modelElementClientDependency) {
-            sb.append(d.toXmi());
-        }
-        sb.append(classifierFeature.toXmi());
-        sb.append("</UML:Class>\n");
         return sb.toString();
     }
     

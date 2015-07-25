@@ -68,15 +68,11 @@ public class XMI implements XMISerializable {
     @Override
     public String toXmi() {
         StringBuilder sb = new StringBuilder();
-        sb.append("<?xml version = '1.0' encoding = 'UTF-8' ?>");
-        sb.append("<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Fri Jul 24 09:48:50 WEST 2015'>");
-        sb.append("<XMI.header>");
+        sb.append("<?xml version = '1.0' encoding = 'UTF-8' ?>\n");
+        sb.append("<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Fri Jul 24 09:48:50 WEST 2015'>\n");
         sb.append(header.toXmi());
-        sb.append("</XMI.header>");
-        sb.append("<XMI.content>");
         sb.append(content.toXmi());
-        sb.append("</XMI.content>");
-        sb.append("</XMI>");
+        sb.append("</XMI>\n");
         return sb.toString();
     }
     

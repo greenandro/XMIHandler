@@ -117,11 +117,11 @@ public class UMLInterface implements XMIReferenceable, XMISerializable {
     public String toXmi() {
         StringBuilder sb = new StringBuilder();
         if(idref!=null) {
-            sb.append("<UML:Interface xmi.idref = '").append(idref).append("'");
+            sb.append("<UML:Interface xmi.idref = '").append(idref).append("'/>\n");
         } else {
-            sb.append("<UML:Interface xmi.id = '").append(id).append("' name = '").append(name).append("' visibility = '").append(visibility).append("' isSpecification = '").append(isSpecification).append("' isRoot = '").append(isRoot).append("' isLeaf = '").append(isLeaf).append("' isAbstract = '").append(isAbstract).append("'>");
+            sb.append("<UML:Interface xmi.id = '").append(id).append("' name = '").append(name).append("' visibility = '").append(visibility).append("' isSpecification = '").append(isSpecification).append("' isRoot = '").append(isRoot).append("' isLeaf = '").append(isLeaf).append("' isAbstract = '").append(isAbstract).append("'>\n");
             sb.append(classifierFeature.toXmi());
-            sb.append("</UML:Interface>");
+            sb.append("</UML:Interface>\n");
         }
         return sb.toString();
     }

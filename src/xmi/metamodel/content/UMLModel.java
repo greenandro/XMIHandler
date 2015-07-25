@@ -89,35 +89,8 @@ public class UMLModel implements XMINamespaceOwner, XMISerializable {
         sb.append("<UML:Model xmi.id = '").append(id).append("' ")
                 .append("name = '").append(name).append("' isSpecification = '").append(isSpecification)
                 .append("' isRoot = '").append(isRoot).append("' isLeaf = '").append(isLeaf)
-                .append("isAbstract = '").append(isAbstract).append("'>\n");
-        
-        for(UMLAbstraction a : ownedElement.getAbstractions()) {
-            sb.append(a.toXmi());
-        }
-        
-        for(UMLAssociation a : ownedElement.getAssociations()) {
-            sb.append(a.toXmi());
-        }
-        
-        for(UMLClass c : ownedElement.getClasses()) {
-            sb.append(c.toXmi());
-        }
-        
-        for(UMLGeneralization g : ownedElement.getGeneratlizations()) {
-            sb.append(g.toXmi());
-        }
-        
-        for(UMLInterface i : ownedElement.getInterfaces()) {
-            sb.append(i.toXmi());
-        }
-        
-        for(UMLPackage p : ownedElement.getPackages()) {
-            
-        }
-        
-        for(UMLStereotype s : ownedElement.getStereotypes()) {
-            
-        }
+                .append("' isAbstract = '").append(isAbstract).append("'>\n");
+        sb.append(ownedElement.toXmi());
         sb.append("</UML:Model>\n");
         return sb.toString();
     }

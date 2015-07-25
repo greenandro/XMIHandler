@@ -139,25 +139,25 @@ public class UMLAbstraction implements XMIReferenceable, XMISerializable {
     public String toXmi() {
         StringBuilder sb = new StringBuilder();
         if(idref==null) {
-            sb.append("<UML:Abstraction xmi.idref = '").append(idref).append("'/>");
+            sb.append("<UML:Abstraction xmi.idref = '").append(idref).append("'/>\n");
         } else {
-            sb.append("<UML:Abstraction xmi.id = '").append(id).append("' isSpecification = '").append(isSpecification).append("'>");
+            sb.append("<UML:Abstraction xmi.id = '").append(id).append("' isSpecification = '").append(isSpecification).append("'>\n");
             if(modelElementStereotype!=null) {
-                sb.append("<UML:ModelElement.stereotype>");
-                sb.append("<UML:Stereotype xmi.idref = '").append(modelElementStereotype.getUmlStereotype().getId()).append("'/>");
-                sb.append("</UML:ModelElement.stereotype>");
+                sb.append("<UML:ModelElement.stereotype>\n");
+                sb.append("<UML:Stereotype xmi.idref = '").append(modelElementStereotype.getUmlStereotype().getId()).append("'/>\n");
+                sb.append("</UML:ModelElement.stereotype>\n");
             }
             if(dependencyClient != null) {
-                sb.append("<UML:Dependency.client>");
-                sb.append("<UML:Class xmi.idref = '").append(dependencyClient.getUmlclass().getId()).append("'/>");
-                sb.append("</UML:Dependency.client>");    
+                sb.append("<UML:Dependency.client>\n");
+                sb.append("<UML:Class xmi.idref = '").append(dependencyClient.getUmlclass().getId()).append("'/>\n");
+                sb.append("</UML:Dependency.client>\n");    
             }
             if(dependencySupplier!=null) {
-                sb.append("<UML:Dependency.supplier>");
-                sb.append("<UML:Interface xmi.idref = '").append(dependencySupplier.getUmlinterface().getId()).append("'/>");
-                sb.append("</UML:Dependency.supplier>");   
+                sb.append("<UML:Dependency.supplier>\n");
+                sb.append("<UML:Interface xmi.idref = '").append(dependencySupplier.getUmlinterface().getId()).append("'/>\n");
+                sb.append("</UML:Dependency.supplier>\n");   
             }
-            sb.append("</UML:Abstraction>");
+            sb.append("</UML:Abstraction>\n");
         }
         return sb.toString();
     }

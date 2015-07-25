@@ -21,11 +21,11 @@ public class XMIContent implements XMISerializable {
     @Override
     public String toXmi() {
         StringBuilder sb = new StringBuilder();
-        sb.append("<XMI.content>");
+        sb.append("<XMI.content>\n");
         for(UMLModel m : models) {
             sb.append(m.toXmi());
         }
-        sb.append("</XMI.content>");
+        sb.append("</XMI.content>\n");
         return sb.toString();
     }
     

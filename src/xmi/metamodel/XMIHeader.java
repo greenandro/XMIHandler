@@ -8,6 +8,8 @@ public class XMIHeader implements XMISerializable {
     private XMIMetamodel metamodel;
 
     public XMIHeader() {
+        documentation = new XMIDocumentation();
+        metamodel = new XMIMetamodel();
     }
 
     public XMIHeader(XMIDocumentation documentation, XMIMetamodel metamodel) {
@@ -34,12 +36,10 @@ public class XMIHeader implements XMISerializable {
     @Override
     public String toXmi() {
         StringBuilder sb = new StringBuilder();
-        sb.append("<XMI.header>");
-        sb.append("<XMI.documentation>");
+        sb.append("<XMI.header>\n");
         sb.append(documentation.toXmi());
-        sb.append("</XMI.documentation>");
         sb.append(metamodel.toXmi());
-        sb.append("</XMI.header>");
+        sb.append("</XMI.header>\n");
         return sb.toString();
     }
     

@@ -83,9 +83,9 @@ public class UMLAssociation implements XMISerializable {
         StringBuilder sb = new StringBuilder();
         sb.append("<UML:Association xmi.id = '").append(id).append("' name = '").append(name)
                 .append("' isSpecification = '").append(isSpecification).append("' isRoot = '").append(isRoot)
-                .append("' isLeaf = '").append(isLeaf).append("' isAbstract = '").append(isAbstract).append("'>");
+                .append("' isLeaf = '").append(isLeaf).append("' isAbstract = '").append(isAbstract).append("'>\n");
         sb.append(associationConnection.toXmi());
-        sb.append("</UML:Association>");
+        sb.append("</UML:Association>\n");
         return sb.toString();
     }
 }

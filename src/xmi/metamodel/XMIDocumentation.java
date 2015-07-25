@@ -38,9 +38,9 @@ public class XMIDocumentation implements XMISerializable {
     public String toXmi() {
         StringBuilder sb = new StringBuilder();
         sb.append("<XMI.documentation>\n");
-        sb.append("<XMI.exporter>").append(exporter).append("</XMI.exporter>");
-        sb.append("<XMI.exporterVersion>").append(exporterVersion).append("</XMI.exporterVersion>");
-        sb.append("</XMI.documentation>");
+        sb.append("<XMI.exporter>").append(exporter).append("</XMI.exporter>\n");
+        sb.append("<XMI.exporterVersion>").append(exporterVersion).append("</XMI.exporterVersion>\n");
+        sb.append("</XMI.documentation>\n");
         return sb.toString();
     }
   

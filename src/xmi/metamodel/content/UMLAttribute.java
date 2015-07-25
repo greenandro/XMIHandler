@@ -112,10 +112,10 @@ public class UMLAttribute implements XMISerializable {
         sb.append("<UML:Attribute xmi.id = '").append(id)
                 .append("' name = '").append(name).append("' visibility = '").append(visibility)
                 .append("' isSpecification = '").append(isSpecification).append("' ownerScope = '").append(ownerScope)
-                .append("' changeability = '").append(changeability).append("' targetScope = '").append(targetScope).append("'>");
+                .append("' changeability = '").append(changeability).append("' targetScope = '").append(targetScope).append("'>\n");
         sb.append(structuralFeatureMultiplicity.toXmi());
         sb.append(structuralFeatureType.toXmi());
-        sb.append("</UML:Attribute>");
+        sb.append("</UML:Attribute>\n");
         return sb.toString();
     }
     

@@ -116,7 +116,9 @@ public class UMLAssociationEnd implements XMISerializable {
             .append("' aggregation = '").append(aggregation).append("' targetScope = '").append(targetScope)
             .append("' changeability = '").append(changeability).append("'>\n");
         sb.append(associationEndParticipants.toXmi());
-        sb.append(associationEndMultiplicities.toXmi());
+        if(associationEndMultiplicities!=null) {
+            sb.append(associationEndMultiplicities.toXmi());
+        }
         sb.append("</UML:AssociationEnd>\n");        
         return sb.toString();
     }

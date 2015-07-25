@@ -12,7 +12,18 @@ import xmi.metamodel.XMI;
  */
 public class Test {
     public static void main(String[] args) throws Exception {
-        XMI xmi = Parser.parse("state.xmi", HandlerFactory.getHandler(HandlerFactory.ARGOUML));
+        XMI xmi;
+        
+        xmi = Parser.parse("state.xmi", HandlerFactory.getHandler(HandlerFactory.ARGOUML));
         System.out.println(xmi.toXmi());
+        
+        //xmi = Parser.parse("command.xmi", HandlerFactory.getHandler(HandlerFactory.ARGOUML));
+        //System.out.println(xmi.toXmi());
+        
+        //xmi = Parser.parse("composite.xmi", HandlerFactory.getHandler(HandlerFactory.ARGOUML)); //ok
+        //System.out.println(xmi.toXmi());
+        
+        //xmi = Parser.parse("facade.xmi", HandlerFactory.getHandler(HandlerFactory.ARGOUML));
+        //System.out.println(xmi.toXmi());
     }
 }

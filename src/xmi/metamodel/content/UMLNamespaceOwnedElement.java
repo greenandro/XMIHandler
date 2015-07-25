@@ -112,7 +112,7 @@ public class UMLNamespaceOwnedElement implements XMISerializable {
     @Override
     public String toXmi() {
         StringBuilder sb = new StringBuilder();
-        sb.append("<UML:Namespace.ownedElement>");
+        sb.append("<UML:Namespace.ownedElement>\n");
         for(UMLPackage p : packages) {
             sb.append(p.toXmi());
         }
@@ -134,7 +134,7 @@ public class UMLNamespaceOwnedElement implements XMISerializable {
         for(UMLStereotype s : stereotypes ) {
             sb.append(s.toXmi());
         }
-        sb.append("</UML:Namespace.ownedElement>");
+        sb.append("</UML:Namespace.ownedElement>\n");
         return sb.toString();
     }
     

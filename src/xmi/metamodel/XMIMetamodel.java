@@ -35,7 +35,7 @@ public class XMIMetamodel implements XMISerializable {
     @Override
     public String toXmi() {
         StringBuilder sb = new StringBuilder();
-        sb.append("<XMI.metamodel xmi.name=\"").append(xmiName).append("\" xmi.version=\"").append(xmiVersion).append("\"/>");
+        sb.append("<XMI.metamodel xmi.name=\"").append(xmiName).append("\" xmi.version=\"").append(xmiVersion).append("\"/>\n");
         return sb.toString();
     }
     

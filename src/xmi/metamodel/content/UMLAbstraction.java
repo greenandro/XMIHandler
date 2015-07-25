@@ -144,7 +144,7 @@ public class UMLAbstraction implements XMIReferenceable, XMISerializable {
             sb.append("<UML:Abstraction xmi.id = '").append(id).append("' isSpecification = '").append(isSpecification).append("'>\n");
             if(modelElementStereotype!=null) {
                 sb.append("<UML:ModelElement.stereotype>\n");
-                sb.append("<UML:Stereotype xmi.idref = '").append(modelElementStereotype.getUmlStereotype().getId()).append("'/>\n");
+                sb.append("<UML:Stereotype xmi.idref = '").append(modelElementStereotype.getUmlStereotype().getIdref()).append("'/>\n");
                 sb.append("</UML:ModelElement.stereotype>\n");
             }
             if(dependencyClient != null) {

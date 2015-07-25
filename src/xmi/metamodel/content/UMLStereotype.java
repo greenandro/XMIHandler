@@ -102,13 +102,13 @@ public class UMLStereotype implements XMIReferenceable, XMISerializable {
     public String toXmi() {
         StringBuilder sb = new StringBuilder();
         if(idref!=null) {
-            sb.append("<UML:Stereotype xmi.idref = '").append(idref).append("'/>");
+            sb.append("<UML:Stereotype xmi.idref = '").append(idref).append("'/>\n");
         } else {
             sb.append("<UML:Stereotype xmi.id = '").append(id).append("' name = '").append(name)
                     .append("' isSpecification = '").append(isSpecification).append("' isRoot = '").append(isRoot)
-                    .append("' isLeaf = '").append(isLeaf).append("' isAbstract = '").append(isAbstract).append("'>");
+                    .append("' isLeaf = '").append(isLeaf).append("' isAbstract = '").append(isAbstract).append("'>\n");
             sb.append(stereotypeBaseClasses.toXmi());
-            sb.append("</UML:Stereotype>");
+            sb.append("</UML:Stereotype>\n");
         }
         return sb.toString();
     }

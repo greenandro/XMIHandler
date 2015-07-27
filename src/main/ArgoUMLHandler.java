@@ -243,7 +243,6 @@ class ArgoUMLHandler extends DefaultHandler implements XMIHandler {
                 break;
                                 
             case "UML:AssociationEnd":
-                System.out.println("--Assoc end");
                 mAssociationEnd = new UMLAssociationEnd(attributes.getValue("xmi.id"), 
                         attributes.getValue("visibility"),  
                         Boolean.parseBoolean(attributes.getValue("isSpecification")), 
@@ -252,12 +251,9 @@ class ArgoUMLHandler extends DefaultHandler implements XMIHandler {
                         attributes.getValue("aggregation"), 
                         attributes.getValue("targetScope"), 
                         attributes.getValue("changeability"));
-                //mAssociationEnd.setAssociationEndParticipants(null);
                 if(mAssociation.getAssociationConnection().getAssociationEnd1() == null) {
-                    //System.out.println("---Entrou aqui!");
                     mAssociation.getAssociationConnection().setAssociationEnd1(mAssociationEnd);
                 } else {
-                    //System.out.println("---Entrou aqui também!");
                     mAssociation.getAssociationConnection().setAssociationEnd2(mAssociationEnd);
                 }
                 break;
@@ -276,14 +272,11 @@ class ArgoUMLHandler extends DefaultHandler implements XMIHandler {
             
             case "UML:Abstraction":
                 if(mclass!=null) {
-                    System.out.println("---!");
                     mAbstraction= new UMLAbstraction(attributes.getValue("xmi.idref"));
                     UMLModelElementClientDependency cd = new UMLModelElementClientDependency(mAbstraction);
                     mclass.getModelElementClientDependency().add(cd);
                 } else {
-                    System.out.println("---¡");
                     mAbstraction = new UMLAbstraction(attributes.getValue("xmi.id"), Boolean.parseBoolean(attributes.getValue("isSpecification")));
-                    //mpackage.getNamespaceOwnedElement().getAbstractions().add(mAbstraction);
                     ownedElement.getAbstractions().add(mAbstraction);
                 }
                 break;
@@ -375,14 +368,9 @@ class ArgoUMLHandler extends DefaultHandler implements XMIHandler {
                 
                 
             case "UML:AssociationEnd.participant":
-                
-                //tags.pop(); //cannot pop, it will affect next global pop!
-                //System.out.println(">"+lt); //how to know previous??
                 if(tags.peek().equals("UML:Class:ref")) {
-                    System.out.println("--A");
                     mAssociationEnd.setAssociationEndParticipants(new UMLAssociationEndParticipant(new UMLClass(refId), null));
                 } else if(tags.peek().equals("UML:Interface:ref")) {
-                    System.out.println("--B");
                     mAssociationEnd.setAssociationEndParticipants(new UMLAssociationEndParticipant(null, new UMLInterface(refId)));
                 }
                 break;
@@ -393,7 +381,6 @@ class ArgoUMLHandler extends DefaultHandler implements XMIHandler {
                 break;               
                 
             case "UML:Class":
-                System.out.println(tags.peek());
                 if( (tags.peek().equals("UML:Abstraction") && tags.get(tags.size()-3).equals("UML:Class")) || 
                         tags.peek().equals("UML:Class") ) {
                     mclass = null;

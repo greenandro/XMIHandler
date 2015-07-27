@@ -21,7 +21,7 @@ public class UMLModelElementClientDependency implements XMISerializable {
     @Override
     public String toXmi() {
         StringBuilder sb = new StringBuilder();
-        sb.append("<UML:ModelElement.clientDependency>");
+        sb.append("<UML:ModelElement.clientDependency>\n");
         sb.append(umlAbstraction.toXmi());
         sb.append("</UML:ModelElement.clientDependency>\n");
         return sb.toString();

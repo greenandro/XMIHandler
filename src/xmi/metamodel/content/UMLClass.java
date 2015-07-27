@@ -50,11 +50,22 @@ public class UMLClass implements XMIReferenceable, XMISerializable {
         return idref;
     }
 
-    
-
     @Override
     public void setIdref(String refId) {
         this.idref = refId;
+    }
+    
+    /**
+     * Change the class ID
+     * @param currentid
+     * @param newId 
+     */
+    public void changeId(String currentid, String newId) {
+        if(idref!=null && idref.equals(currentid)) {
+            idref = newId;
+        } else if(id!=null && id.equals(currentid)) {
+            id = newId;
+        }
     }
 
     public String getId() {

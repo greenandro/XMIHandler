@@ -1,7 +1,9 @@
 package xmi.metamodel;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import xmi.metamodel.content.UMLAbstraction;
 import xmi.metamodel.content.UMLAssociation;
 import xmi.metamodel.content.UMLAssociationEndParticipant;
 import xmi.metamodel.content.UMLClass;
@@ -39,20 +41,37 @@ public class XMIContent implements XMISerializable {
         StringBuilder sb = new StringBuilder();
         for(UMLModel m : models) {
             for(UMLClass c : m.getNamespaceOwnedElement().getClasses()) {
-                sb.append("<eClassifiers xsi:type=\"ecore:EClass\" name=\"").append(c.getName()).append("\">\n");
+                sb.append("<eClassifiers xsi:type=\"ecore:EClass\" name=\"").append(c.getName()).append("\"");
                 //todo: abstraction
+                //eSuperTypes="#//TheInterface"
+                
+                
+                c.getModelElementClientDependency().forEach(mdc -> {
+                    UMLAbstraction abs = mdc.getUmlAbstraction();
+                    if(abs.getDependencySupplier() != null) {
+                        String idi = abs.getDependencySupplier().getUmlinterface().getIdref();
+                        UMLInterface sup = models.get(0).getNamespaceOwnedElement().getInterfaces().stream().filter(ti -> ti.getId().equals(idi)).findFirst().get();
+                        sb.append(" eSuperTypes=\"#//").append(sup.getName()).append("\"");
+                        System.out.println("appended!");
+                    }
+                });
+                
+                
+                
+                
+                sb.append(" >\n");
                 sb.append(c.toEcore());
                 for(UMLAssociation a : m.getNamespaceOwnedElement().getAssociations()) {
                     UMLAssociationEndParticipant p1 = a.getAssociationConnection().getAssociationEnd1().getAssociationEndParticipants();
                     UMLAssociationEndParticipant p2 = a.getAssociationConnection().getAssociationEnd2().getAssociationEndParticipants();
                                         
-                    if(p1.getUmlClass()!=null && p1.getUmlClass().getIdref().equals(a.getId())) {
+                    if(p1.getUmlClass()!=null && p1.getUmlClass().getIdref().equals(c.getId())) {
                         String aname = a.getName();
                         String cname = "";
                         if(p2.getUmlClass()!=null) {
-                            UMLClass c2 = models.get(0).getNamespaceOwnedElement().getClasses().stream().filter(tc -> tc.getId().equals(p2.getUmlClass().getId())).findFirst().get();
+                            UMLClass c2 = models.get(0).getNamespaceOwnedElement().getClasses().stream().filter(tc -> tc.getId().equals(p2.getUmlClass().getIdref())).findFirst().get();
                             cname = c2.getName();
-                        } else if(p2.getUmlInterface()!=null) {
+                        } else if(p2.getUmlInterface()!=null && p1.getUmlClass().getIdref().equals(c.getId())) {
                             UMLInterface c2 = models.get(0).getNamespaceOwnedElement().getInterfaces().stream().filter(tc -> tc.getId().equals(p2.getUmlClass().getId())).findFirst().get();
                             cname = c2.getName();
                         }
@@ -62,7 +81,7 @@ public class XMIContent implements XMISerializable {
                         
                         sb.append("<eStructuralFeatures xsi:type=\"ecore:EReference\" name=\"").append(aname).append("\" eType=\"#//").append(cname).append("\"/>");
                     }
-                                    }
+                }
                 sb.append("</eClassifiers>");
             }
             
@@ -71,12 +90,7 @@ public class XMIContent implements XMISerializable {
                 for(UMLOperation o : i.getClassifierFeature().getOperations()) {
                     sb.append(o.toEcore());
                 }
-                sb.append("</eClassifiers>");
-                
-                
-    
-  
-                
+                sb.append("</eClassifiers>");                
             }
             
         }

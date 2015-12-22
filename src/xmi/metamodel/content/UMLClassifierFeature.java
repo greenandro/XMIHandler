@@ -35,4 +35,9 @@ public class UMLClassifierFeature implements XMISerializable {
         return sb.toString();
     }
     
+    @Override
+    public String toEcore() {
+        return "";
+    }
+    
 }

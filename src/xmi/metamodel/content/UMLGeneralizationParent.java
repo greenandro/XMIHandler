@@ -31,4 +31,9 @@ public class UMLGeneralizationParent implements XMISerializable {
         return sb.toString();
     }
     
+    @Override
+    public String toEcore() {
+        return "";
+    }
+    
 }

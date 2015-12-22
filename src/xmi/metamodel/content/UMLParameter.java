@@ -61,9 +61,16 @@ public class UMLParameter implements XMISerializable {
     public String toXmi() {
         StringBuilder sb = new StringBuilder();
         sb.append("<UML:Parameter xmi.id = '").append(id).append("' name = '").append(name).append("' isSpecification = '").append(isSpecification).append("' kind = '").append(kind).append("'>\n");
-        sb.append(parameterType.toXmi());
+        if(parameterType!=null) {
+            sb.append(parameterType.toXmi());
+        }
         sb.append("</UML:Parameter>\n");
         return sb.toString();
+    }
+    
+    @Override
+    public String toEcore() {
+        return "";
     }
     
 }

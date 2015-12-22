@@ -25,4 +25,9 @@ public class UMLGeneralizableElementGeneralization implements XMISerializable {
         sb.append("</UML:GeneralizableElement.generalization>\n");
         return sb.toString();
     }
+    
+    @Override
+    public String toEcore() {
+        return "";
+    }
 }

@@ -43,5 +43,10 @@ public class XMIDocumentation implements XMISerializable {
         sb.append("</XMI.documentation>\n");
         return sb.toString();
     }
+
+    @Override
+    public String toEcore() {
+        return "";
+    }
   
 }

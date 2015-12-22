@@ -138,4 +138,9 @@ public class UMLInterface implements XMIReferenceable, XMISerializable {
         return sb.toString();
     }
     
+    @Override
+    public String toEcore() {
+        return "";
+    }
+    
 }

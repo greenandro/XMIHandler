@@ -93,6 +93,7 @@ class ArgoUMLHandler extends DefaultHandler implements XMIHandler {
      */
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
+        //System.out.println(" "+ qName);
         tags.push(qName);
         //System.out.println("Push " + tags);
         switch (qName) {
@@ -264,6 +265,14 @@ class ArgoUMLHandler extends DefaultHandler implements XMIHandler {
                     UMLGeneralization gn = new UMLGeneralization(attributes.getValue("xmi.idref"));
                     g.setGeneralizations(gn);
                     mclass.getGeneralizableElementGeneralizations().add(g);
+                    //?
+                    /*
+                    for(UMLGeneralization gen : mpackage.getNamespaceOwnedElement().getGeneratlizations()) {
+                        if(gen.getId().equals(attributes.getValue("xmi.id")) ) {
+                            mGeneralization = gen;
+                            break;
+                        }
+                    }*/
                 } else {
                     mGeneralization = new UMLGeneralization(attributes.getValue("xmi.id"), Boolean.parseBoolean("isSpecification"), null, null);
                     mpackage.getNamespaceOwnedElement().getGeneratlizations().add(mGeneralization);
@@ -333,7 +342,7 @@ class ArgoUMLHandler extends DefaultHandler implements XMIHandler {
      */
     @Override
     public void endElement(String uri, String localName, String qName) throws SAXException {
-        //System.out.println(qName);
+        //System.out.println("/ "+ qName);
         //System.out.println("POP  " + tags);
         
         switch (qName) {
@@ -391,10 +400,6 @@ class ArgoUMLHandler extends DefaultHandler implements XMIHandler {
                 mInterface = null;
                 break;
                 
-            case "UML:Generalization":
-                mGeneralization = null;
-                break;
-                
             case "UML:Generalization.child": {
                 UMLClass c = new UMLClass(refId);
                 UMLGeneralizationChild gc = new UMLGeneralizationChild(c);
@@ -406,6 +411,11 @@ class ArgoUMLHandler extends DefaultHandler implements XMIHandler {
                 UMLGeneralizationParent gp = new UMLGeneralizationParent(c);
                 mGeneralization.setParent(gp);
             } break;
+                
+            case "UML:Generalization":
+                mGeneralization = null;
+                break;
+                
                 
             case "UML:Abstraction":
                 mAbstraction = null;

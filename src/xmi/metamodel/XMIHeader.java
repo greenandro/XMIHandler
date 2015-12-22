@@ -42,5 +42,10 @@ public class XMIHeader implements XMISerializable {
         sb.append("</XMI.header>\n");
         return sb.toString();
     }
+
+    @Override
+    public String toEcore() {
+        return "";
+    }
     
 }

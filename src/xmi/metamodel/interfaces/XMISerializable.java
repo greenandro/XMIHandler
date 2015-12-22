@@ -14,4 +14,6 @@ public interface XMISerializable {
      * @return 
      */
     public String toXmi();
+    
+    public String toEcore();
 }

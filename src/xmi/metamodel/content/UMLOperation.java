@@ -131,4 +131,11 @@ public class UMLOperation implements XMISerializable {
         return sb.toString();
     }
 
+    @Override
+    public String toEcore() {
+        return "<eOperations name=\"" + name + "\"/>";
+    }
+
+    
+    
 }

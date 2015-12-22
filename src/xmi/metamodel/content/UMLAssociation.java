@@ -88,4 +88,9 @@ public class UMLAssociation implements XMISerializable {
         sb.append("</UML:Association>\n");
         return sb.toString();
     }
+    
+    @Override
+    public String toEcore() {
+        return "";
+    }
 }

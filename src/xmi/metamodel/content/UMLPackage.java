@@ -98,5 +98,9 @@ public class UMLPackage implements XMINamespaceOwner, XMISerializable {
         return sb.toString();
     }
     
+    @Override
+    public String toEcore() {
+        return "";
+    }
     
 }

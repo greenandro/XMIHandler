@@ -58,6 +58,16 @@ public class UMLNamespaceOwnedElement implements XMISerializable {
         return null;
     }
     
+    public UMLClass getClassInsensitive(String className) {
+        for(UMLClass c : classes) {
+            if(c.getName().toLowerCase().trim().equals(className.toLowerCase().trim())) {
+                return c;
+            }
+        }
+        return null;
+    }
+    
+    
     /**
      * Check if the interface with the given name exists
      * @param interfaceName
@@ -80,6 +90,47 @@ public class UMLNamespaceOwnedElement implements XMISerializable {
         }
         return null;
     }
+    
+    
+    public UMLInterface getInterfaceInsensitive(String interfaceName) {
+        for(UMLInterface i : interfaces) {
+            if(i.getName().toLowerCase().trim().equals(interfaceName.toLowerCase().trim())) {
+                return i;
+            }
+        }
+        return null;
+    }
+    
+    public UMLAssociation getConnection(String class1, String class2) {
+        for(UMLAssociation a : associations) {
+            if(a.getAssociationConnection().getAssociationEnd1().getAssociationEndParticipants().getUmlClass()!=null && 
+                   a.getAssociationConnection().getAssociationEnd2().getAssociationEndParticipants().getUmlClass()!=null ) {
+                
+                String ip1 = a.getAssociationConnection().getAssociationEnd1().getAssociationEndParticipants().getUmlClass().getIdref();
+                String ip2 = a.getAssociationConnection().getAssociationEnd2().getAssociationEndParticipants().getUmlClass().getIdref();
+                String p1 = getClassById(ip1).getName();
+                String p2 = getClassById(ip2).getName();
+                System.out.println("(" + p1 + " ---> " + p2 + ")");
+                if(p1.equals(class1) && p2.equals(class2)) {
+                    return a;
+                }
+            }
+        }
+        return null;
+    }
+    
+    
+    public UMLClass getClassById(String xmiid) {
+        for(UMLClass c : classes) {
+            if(c.getId().equals(xmiid)) {
+                return c;
+            }
+        }
+        return null;
+    }
+    
+    
+    
     
     public List<UMLClass> getClasses() {
         return classes;
@@ -138,6 +189,10 @@ public class UMLNamespaceOwnedElement implements XMISerializable {
         return sb.toString();
     }
     
+    @Override
+    public String toEcore() {
+        return "";
+    }
     
     
             

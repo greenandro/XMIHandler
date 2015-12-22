@@ -29,5 +29,10 @@ public class UMLGeneralizationChild implements XMISerializable {
         sb.append(umlClass.toXmi());
         sb.append("</UML:Generalization.child>");
         return sb.toString();
-    }                 
+    }     
+    
+    @Override
+    public String toEcore() {
+        return "";
+    }
 }

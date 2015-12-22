@@ -73,4 +73,9 @@ public class UMLAssociationConnection implements XMISerializable {
         return sb.toString();
     }
     
+    @Override
+    public String toEcore() {
+        return "";
+    }
+    
 }

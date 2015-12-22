@@ -1,5 +1,6 @@
 package xmi.metamodel;
 
+import java.util.Date;
 import xmi.metamodel.interfaces.XMISerializable;
 
 public class XMI implements XMISerializable {
@@ -64,16 +65,28 @@ public class XMI implements XMISerializable {
     public void setContent(XMIContent content) {
         this.content = content;
     }
-
+    
     @Override
     public String toXmi() {
         StringBuilder sb = new StringBuilder();
         sb.append("<?xml version = '1.0' encoding = 'UTF-8' ?>\n");
-        sb.append("<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Fri Jul 24 09:48:50 WEST 2015'>\n");
+        sb.append("<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = '").append(new Date().toString()).append("'>\n");
         sb.append(header.toXmi());
         sb.append(content.toXmi());
         sb.append("</XMI>\n");
         return sb.toString();
     }
     
+    
+    public String toEcore() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+        sb.append("<ecore:EPackage xmi:version=\"2.0\" xmlns:xmi=\"http://www.omg.org/XMI\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n" +
+                  "xmlns:ecore=\"http://www.eclipse.org/emf/2002/Ecore\" name=\"XMISerialized\" nsURI=\"http://www.example.org/test\" nsPrefix=\"xmis\">\n");
+        
+        sb.append(content.toEcore()).append("\n");
+        sb.append("</ecore:EPackage>\n");
+        return sb.toString();
+    }
+        
 }

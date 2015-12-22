@@ -161,5 +161,9 @@ public class UMLAbstraction implements XMIReferenceable, XMISerializable {
         }
         return sb.toString();
     }
-    
+
+    @Override
+    public String toEcore() {
+        return "";
+    }
 }

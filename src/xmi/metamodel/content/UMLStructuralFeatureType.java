@@ -45,5 +45,10 @@ public class UMLStructuralFeatureType implements XMISerializable{
         sb.append("</UML:StructuralFeature.type>");
         return sb.toString();
     }
+    
+    @Override
+    public String toEcore() {
+        return "";
+    }
 
 }

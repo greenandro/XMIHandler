@@ -38,5 +38,9 @@ public class XMIMetamodel implements XMISerializable {
         sb.append("<XMI.metamodel xmi.name=\"").append(xmiName).append("\" xmi.version=\"").append(xmiVersion).append("\"/>\n");
         return sb.toString();
     }
-    
+
+    @Override
+    public String toEcore() {
+        return "";
+    }
 }

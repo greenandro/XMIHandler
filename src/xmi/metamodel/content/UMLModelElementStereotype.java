@@ -26,5 +26,9 @@ public class UMLModelElementStereotype implements XMISerializable {
         sb.append("</UML:ModelElement.stereotype>\n");
         return sb.toString();
     }
-                      
+                 
+    @Override
+    public String toEcore() {
+        return "";
+    }
 }

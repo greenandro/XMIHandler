@@ -113,6 +113,10 @@ public class UMLStereotype implements XMIReferenceable, XMISerializable {
         return sb.toString();
     }
     
+    @Override
+    public String toEcore() {
+        return "";
+    }
     
 
 }

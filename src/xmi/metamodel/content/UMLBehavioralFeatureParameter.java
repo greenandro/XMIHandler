@@ -27,4 +27,9 @@ public class UMLBehavioralFeatureParameter implements XMISerializable {
         return sb.toString();
     }
     
+    @Override
+    public String toEcore() {
+        return "";
+    }
+    
 }

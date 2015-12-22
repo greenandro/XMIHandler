@@ -26,5 +26,10 @@ public class UMLDependencyClient implements XMISerializable {
         sb.append("</UML:Dependency.client>\n");
         return sb.toString();
     }
+    
+    @Override
+    public String toEcore() {
+        return "";
+    }
 
 }

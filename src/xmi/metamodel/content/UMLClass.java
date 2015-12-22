@@ -181,5 +181,20 @@ public class UMLClass implements XMIReferenceable, XMISerializable {
         }
         return sb.toString();
     }
+
+    @Override
+    public String toEcore() {
+        StringBuilder sb = new StringBuilder();
+        classifierFeature.getOperations().forEach((UMLOperation a) -> {
+            sb.append(a.toEcore()).append("\n");
+        });
+        classifierFeature.getAttributes().forEach((UMLAttribute a) -> {
+            sb.append(a.toEcore()).append("\n");
+        });
+        return sb.toString();
+    }
+    
+    
+    
     
 }

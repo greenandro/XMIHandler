@@ -118,5 +118,12 @@ public class UMLAttribute implements XMISerializable {
         sb.append("</UML:Attribute>\n");
         return sb.toString();
     }
+
+    @Override
+    public String toEcore() {
+        return "<eStructuralFeatures xsi:type=\"ecore:EAttribute\" name=\""+name+"\" eType=\"ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString\"/>";
+    }
+    
+    
     
 }

@@ -36,5 +36,9 @@ public class UMLAssociationEndParticipant implements XMISerializable{
         sb.append("</UML:AssociationEnd.participant>\n");
         return sb.toString();
     }
-             
+ 
+    @Override
+    public String toEcore() {
+        return "";
+    }
 }

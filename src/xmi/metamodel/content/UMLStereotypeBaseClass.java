@@ -24,4 +24,9 @@ public class UMLStereotypeBaseClass implements XMISerializable {
         sb.append("<UML:Stereotype.baseClass>").append(content).append("</UML:Stereotype.baseClass>\n");
         return sb.toString();
     }
+    
+    @Override
+    public String toEcore() {
+        return "";
+    }
 }
